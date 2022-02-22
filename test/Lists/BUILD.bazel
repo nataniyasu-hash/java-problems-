@@ -1,0 +1,82 @@
+load(
+    "@rules_haskell//haskell:defs.bzl",
+    "haskell_test",
+    "haskell_binary",
+    "haskell_toolchain_library",
+)
+
+haskell_toolchain_library(name = "base")
+
+haskell_binary(
+    name = "ComprehensionTest",
+    srcs = ["ComprehensionTest.hs"],
+    main_function = "Lists.ComprehensionTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/Lists:Comprehension",
+    #    "//ListCompr/src:Comprehension",
+    ],
+)
+
+haskell_test(
+    name = "MapFilterTest",
+    srcs = ["MapFilterTest.hs"],
+    main_function = "Lists.MapFilterTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/Lists:MapFilter",
+       # "//ListCompr/src:MapFilter",
+    ],
+)
+
+haskell_test(
+    name = "ConcatMapTest",
+    srcs = ["ConcatMapTest.hs"],
+    main_function = "Lists.ConcatMapTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/Lists:ConcatMap",
+      #  "//ListCompr/src:ConcatMap",
+    ],
+)
+
+haskell_test(
+    name = "FoldlTest",
+    srcs = ["FoldlTest.hs"],
+    main_function = "Lists.FoldlTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/Lists:Foldl",
+    ],
+)
+
+haskell_test(
+    name = "FoldrTest",
+    srcs = ["FoldrTest.hs"],
+    main_function = "Lists.FoldrTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/Lists:Foldr",
+    ],
+)
+
+haskell_test(
+    name = "recursion_test",
+    srcs = ["RecursionTest.hs"],
+    main_function = "Lists.RecursionTest.main",
+  #  main_file =  "RecursionTest.hs",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/Lists:Recursion",
+    ],
+)
+
+
+
+

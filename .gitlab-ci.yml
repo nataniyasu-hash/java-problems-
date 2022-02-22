@@ -1,0 +1,111 @@
+image: haskell:8.8.4
+
+stages:
+  - functions
+  - comprehension
+  - mapfilter
+  - recursion
+  - foldr
+  - foldl
+  - concatmap
+  - fakultativ
+
+variables:
+  STACK_ROOT: "${CI_PROJECT_DIR}/.stack-root"
+  STACK_OPTS: "--system-ghc"
+
+operators:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :operators
+
+functions:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :functions
+
+collatz:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :collatz
+
+fact:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :fact
+
+binom:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :binom
+
+ggT:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :ggt
+
+fib:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :fib
+
+deMorgan:
+  stage: functions
+  script:
+    - stack $STACK_OPTS test :demorgan
+
+comprehension:
+  stage: comprehension
+  script:
+    - stack $STACK_OPTS test :comprehension
+
+mapfilter:
+  stage: mapfilter
+  script:
+    - stack $STACK_OPTS test :mapfilter
+
+recursion:
+  stage: recursion
+  script:
+    - stack $STACK_OPTS test :recursion
+
+foldr:
+  stage: foldr
+  script:
+    - stack $STACK_OPTS test :foldr
+
+foldl:
+  stage: foldl
+  script:
+    - stack $STACK_OPTS test :foldl
+
+concatmap:
+  stage: concatmap
+  script:
+    - stack $STACK_OPTS test :concatmap
+
+morefun:
+  stage: fakultativ
+  script:
+    - stack $STACK_OPTS test :morefun
+
+listmonad:
+  stage: fakultativ
+  script:
+    - stack $STACK_OPTS test :listmonad
+
+adtlist:
+  stage: fakultativ
+  script:
+    - stack $STACK_OPTS test :adtlist
+
+andoranyall:
+  stage: fakultativ
+  script:
+    - stack $STACK_OPTS test :andoranyall
+
+minimummaximum:
+  stage: fakultativ
+  script:
+    - stack $STACK_OPTS test :minimummaximum
+

@@ -1,0 +1,59 @@
+load(
+    "@rules_haskell//haskell:defs.bzl",
+    "haskell_test",
+    "haskell_toolchain_library",
+)
+
+haskell_toolchain_library(name = "base")
+
+haskell_test(
+    name = "ADTListTest",
+    srcs = ["ADTListTest.hs"],
+    main_function = "ListsFak.ADTListTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+    ],
+)
+
+haskell_test(
+    name = "AndOrAnyAllTest",
+    srcs = ["AndOrAnyAllTest.hs"],
+    main_function = "ListsFak.AndOrAnyAllTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+    ],
+)
+
+haskell_test(
+    name = "ListMonadTest",
+    srcs = ["ListMonadTest.hs"],
+    main_function = "ListsFak.ListMonadTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/ListsFak:ListMonad"
+    ],
+)
+
+haskell_test(
+    name = "MinimumMaximumTest",
+    srcs = ["MinimumMaximumTest.hs"],
+    main_function = "ListsFak.MinimumMaximumTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+    ],
+)
+
+haskell_test(
+    name = "MoreFunTest",
+    srcs = ["MoreFunTest.hs"],
+    main_function = "ListsFak.MoreFunTest.main",
+    deps = [
+        ":base",
+        "@stackage//:QuickCheck",
+        "//HaskellSolution/src/ListsFak:MoreFun"
+    ],
+)

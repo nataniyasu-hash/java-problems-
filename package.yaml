@@ -1,0 +1,265 @@
+name:                HaskellTemplate
+version:             0.1.0.0
+github:              "githubuser/HaskellTemplate"
+license:             BSD3
+author:              "James Test"
+maintainer:          "james@test.com"
+copyright:           "School of Haskell in Luebeck"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:  Please see the README on GitHub at <https://github.com/githubuser/HaskellTemplate#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - QuickCheck
+
+library:
+  source-dirs:   src
+  when:
+    - condition: false
+      other-modules: Paths_HaskellTemplate
+# Telling Cabal where the Main module is.
+# https://stackoverflow.com/questions/27591266/telling-cabal-where-the-main-module-is
+executable:
+  main:          Main.main
+  source-dirs:   app
+  when:
+    - condition: false
+      other-modules: Paths_HaskellTemplate
+  ghc-options:
+  - -threaded
+  - -rtsopts
+  - -with-rtsopts=-N
+  dependencies:
+  - HaskellTemplate
+
+tests:
+  operators:
+    main: Functions.OperatorsTest.main
+    other-modules: Functions.Operators
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  functions:
+    main: Functions.FunctionsTest.main
+    other-modules: Functions.Functions
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  collatz:
+    main: Functions.CollatzTest.main
+    other-modules: Functions.Functions
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  fact:
+    main: Functions.FactTest.main
+    other-modules: Functions.Functions
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  binom:
+    main: Functions.BinomTest.main
+    other-modules: Functions.Functions
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  ggt:
+    main: Functions.GgtTest.main
+    other-modules: Functions.Functions
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  fib:
+    main: Functions.FibTest.main
+    other-modules: Functions.Functions
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  demorgan:
+    main: Functions.DeMorganTest.main
+    other-modules: Functions.Operators
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  comprehension:
+    main: Lists.ComprehensionTest.main
+    other-modules: Lists.Comprehension
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  mapfilter:
+    main: Lists.MapFilterTest.main
+    other-modules: Lists.MapFilter
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  concatmap:
+    main: Lists.ConcatMapTest.main
+    other-modules: Lists.ConcatMap
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  recursion:
+    main: Lists.RecursionTest.main
+    other-modules: Lists.Recursion
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  foldl:
+    main: Lists.FoldlTest.main
+    other-modules: Lists.Foldl
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  foldr:
+    main: Lists.FoldrTest.main
+    other-modules: Lists.Foldr
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  adtlist:
+    main: ListsFak.ADTListTest.main
+    other-modules: []
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  andoranyall:
+    main: ListsFak.AndOrAnyAllTest.main
+    other-modules: []
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  listmonad:
+    main: ListsFak.ListMonadTest.main
+    other-modules: ListsFak.ListMonad
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  minimummaximum:
+    main: ListsFak.MinimumMaximumTest.main
+    other-modules: []
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  morefun:
+    main: ListsFak.MoreFunTest.main
+    other-modules: ListsFak.MoreFun
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+
+  takedrop:
+    main: ListsFak.TakeDropTest.main
+    other-modules: []
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
