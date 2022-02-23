@@ -1,4 +1,5 @@
 .stack-work/
+HaskellTemplate.cabal
 stack.yaml.lock
 *~
 /dist-newstyle/
