@@ -1,5 +1,5 @@
 # Building Projects with Stack
-Excerpt from Get "Programming With Haskell" Manning.
+Excerpt from "Get Programming With Haskell" by Will Kurt (Manning).
 
 The first thing you need to do is make sure stack is up-to-date.
 You can do this with the stack update command:

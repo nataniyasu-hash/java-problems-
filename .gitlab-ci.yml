@@ -2,13 +2,8 @@ image: haskell:8.10.7
 
 stages:
   - functions
-  - comprehension
-  - mapfilter
-  - recursion
-  - foldr
-  - foldl
-  - concatmap
-  - fakultativ
+  - lists
+  - optional
 
 variables:
   STACK_ROOT: "${CI_PROJECT_DIR}/.stack-root"
@@ -55,57 +50,57 @@ deMorgan:
     - stack $STACK_OPTS test :demorgan
 
 comprehension:
-  stage: comprehension
+  stage: lists
   script:
     - stack $STACK_OPTS test :comprehension
 
 mapfilter:
-  stage: mapfilter
+  stage: lists
   script:
     - stack $STACK_OPTS test :mapfilter
 
 recursion:
-  stage: recursion
+  stage: lists
   script:
     - stack $STACK_OPTS test :recursion
 
 foldr:
-  stage: foldr
+  stage: lists
   script:
     - stack $STACK_OPTS test :foldr
 
 foldl:
-  stage: foldl
+  stage: lists
   script:
     - stack $STACK_OPTS test :foldl
 
 concatmap:
-  stage: concatmap
+  stage: lists
   script:
     - stack $STACK_OPTS test :concatmap
 
 morefun:
-  stage: fakultativ
+  stage: optional
   script:
     - stack $STACK_OPTS test :morefun
 
 listmonad:
-  stage: fakultativ
+  stage: optional
   script:
     - stack $STACK_OPTS test :listmonad
 
 adtlist:
-  stage: fakultativ
+  stage: optional
   script:
     - stack $STACK_OPTS test :adtlist
 
 andoranyall:
-  stage: fakultativ
+  stage: optional
   script:
     - stack $STACK_OPTS test :andoranyall
 
 minimummaximum:
-  stage: fakultativ
+  stage: optional
   script:
     - stack $STACK_OPTS test :minimummaximum
 
