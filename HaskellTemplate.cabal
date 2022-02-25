@@ -1,0 +1,327 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           HaskellTemplate
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/HaskellTemplate#readme>
+homepage:       https://github.com/githubuser/HaskellTemplate#readme
+bug-reports:    https://github.com/githubuser/HaskellTemplate/issues
+author:         James Test
+maintainer:     james@test.com
+copyright:      School of Haskell in Luebeck
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/HaskellTemplate
+
+library
+  exposed-modules:
+      Functions.Composition
+      Functions.Functions
+      Functions.Operators
+      Lists.Comprehension
+      Lists.ConcatMap
+      Lists.Foldl
+      Lists.Foldr
+      Lists.MapFilter
+      Lists.Recursion
+      ListsFak.ListMonad
+      ListsFak.MoreFun
+  hs-source-dirs:
+      src
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+executable HaskellTemplate
+  main-is: Main.hs
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Main.main
+  build-depends:
+      HaskellTemplate
+    , QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite adtlist
+  type: exitcode-stdio-1.0
+  main-is: ListsFak/ADTListTest.hs
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is ListsFak.ADTListTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite andoranyall
+  type: exitcode-stdio-1.0
+  main-is: ListsFak/AndOrAnyAllTest.hs
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is ListsFak.AndOrAnyAllTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite binom
+  type: exitcode-stdio-1.0
+  main-is: Functions/BinomTest.hs
+  other-modules:
+      Functions.Functions
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.BinomTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite collatz
+  type: exitcode-stdio-1.0
+  main-is: Functions/CollatzTest.hs
+  other-modules:
+      Functions.Functions
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.CollatzTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite comprehension
+  type: exitcode-stdio-1.0
+  main-is: Lists/ComprehensionTest.hs
+  other-modules:
+      Lists.Comprehension
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Lists.ComprehensionTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite concatmap
+  type: exitcode-stdio-1.0
+  main-is: Lists/ConcatMapTest.hs
+  other-modules:
+      Lists.ConcatMap
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Lists.ConcatMapTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite demorgan
+  type: exitcode-stdio-1.0
+  main-is: Functions/DeMorganTest.hs
+  other-modules:
+      Functions.Operators
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.DeMorganTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite fact
+  type: exitcode-stdio-1.0
+  main-is: Functions/FactTest.hs
+  other-modules:
+      Functions.Functions
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.FactTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite fib
+  type: exitcode-stdio-1.0
+  main-is: Functions/FibTest.hs
+  other-modules:
+      Functions.Functions
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.FibTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite foldl
+  type: exitcode-stdio-1.0
+  main-is: Lists/FoldlTest.hs
+  other-modules:
+      Lists.Foldl
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Lists.FoldlTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite foldr
+  type: exitcode-stdio-1.0
+  main-is: Lists/FoldrTest.hs
+  other-modules:
+      Lists.Foldr
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Lists.FoldrTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite functions
+  type: exitcode-stdio-1.0
+  main-is: Functions/FunctionsTest.hs
+  other-modules:
+      Functions.Functions
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.FunctionsTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite ggt
+  type: exitcode-stdio-1.0
+  main-is: Functions/GgtTest.hs
+  other-modules:
+      Functions.Functions
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.GgtTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite listmonad
+  type: exitcode-stdio-1.0
+  main-is: ListsFak/ListMonadTest.hs
+  other-modules:
+      ListsFak.ListMonad
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is ListsFak.ListMonadTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite mapfilter
+  type: exitcode-stdio-1.0
+  main-is: Lists/MapFilterTest.hs
+  other-modules:
+      Lists.MapFilter
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Lists.MapFilterTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite minimummaximum
+  type: exitcode-stdio-1.0
+  main-is: ListsFak/MinimumMaximumTest.hs
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is ListsFak.MinimumMaximumTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite morefun
+  type: exitcode-stdio-1.0
+  main-is: ListsFak/MoreFunTest.hs
+  other-modules:
+      ListsFak.MoreFun
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is ListsFak.MoreFunTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite operators
+  type: exitcode-stdio-1.0
+  main-is: Functions/OperatorsTest.hs
+  other-modules:
+      Functions.Operators
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Functions.OperatorsTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite recursion
+  type: exitcode-stdio-1.0
+  main-is: Lists/RecursionTest.hs
+  other-modules:
+      Lists.Recursion
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is Lists.RecursionTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite takedrop
+  type: exitcode-stdio-1.0
+  main-is: ListsFak/TakeDropTest.hs
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -main-is ListsFak.TakeDropTest.main
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+  default-language: Haskell2010
