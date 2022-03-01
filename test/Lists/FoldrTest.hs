@@ -1,10 +1,8 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE FlexibleInstances #-}
-
 module Lists.FoldrTest where
 import qualified Lists.Foldr as L
 import Prelude as P
-
 import Test.QuickCheck
 import System.Exit(exitSuccess, exitFailure)
 
@@ -69,4 +67,3 @@ runTests = $quickCheckAll
 
 main = runTests >>= \passed -> if passed then exitSuccess
                                          else exitFailure
-

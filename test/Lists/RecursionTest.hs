@@ -1,11 +1,9 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE FlexibleInstances #-}
-
 module Lists.RecursionTest where
 import qualified Lists.Recursion as L
 import Prelude as P
 import Data.List as PL
-
 import Test.QuickCheck
 import System.Exit(exitSuccess, exitFailure)
 
@@ -85,4 +83,3 @@ runTests = $quickCheckAll
 
 main = runTests >>= \passed -> if passed then exitSuccess
                                          else exitFailure
-

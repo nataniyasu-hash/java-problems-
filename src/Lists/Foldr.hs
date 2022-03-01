@@ -1,7 +1,5 @@
 {-# LANGUAGE ExtendedDefaultRules #-}
-
 module Lists.Foldr where
-  
 import Prelude hiding (sum,or,filter,
                        prod,any,reverse,
                        length,all,takeWhile,

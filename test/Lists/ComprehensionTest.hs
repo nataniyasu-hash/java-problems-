@@ -1,5 +1,4 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module Lists.ComprehensionTest where
 import Lists.Comprehension
 import Test.QuickCheck
@@ -41,4 +40,3 @@ runTests = $quickCheckAll
 
 main = runTests >>= \passed -> if passed then exitSuccess
                                          else exitFailure
-

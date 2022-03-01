@@ -1,8 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module Functions.DeMorganTest where
 import Functions.Operators
-
 import Test.QuickCheck
 import System.Exit(exitSuccess, exitFailure)
 

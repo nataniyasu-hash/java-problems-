@@ -1,9 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module ListsFak.TakeDropTest where
 import Test.QuickCheck
 import System.Exit(exitSuccess, exitFailure)
-
 
 
 return []

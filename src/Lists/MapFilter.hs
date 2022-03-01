@@ -7,4 +7,3 @@ sqrs  = undefined
 euler1 = undefined
 
 finde = undefined
-

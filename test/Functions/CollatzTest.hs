@@ -1,11 +1,8 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module Functions.CollatzTest where
 import Functions.Functions
-
 import Test.QuickCheck
 import System.Exit(exitSuccess, exitFailure)
-
 
 prop_conjecture x = x>0&&x<100 ==>collatz x == 1
 

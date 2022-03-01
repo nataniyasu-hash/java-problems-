@@ -1,11 +1,8 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module Functions.FibTest where
 import Functions.Functions
-
 import Test.QuickCheck
 import System.Exit(exitSuccess, exitFailure)
-
 
 prop_fib = False
 

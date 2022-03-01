@@ -1,8 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE FlexibleInstances #-}
-
 module ListsFak.AndOrAnyAllTest where
-
 import Test.QuickCheck
 import System.Exit(exitSuccess, exitFailure)
 
@@ -27,4 +25,3 @@ runTests = $quickCheckAll
 
 main = runTests >>= \passed -> if passed then exitSuccess
                                          else exitFailure
-

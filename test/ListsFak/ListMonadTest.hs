@@ -1,5 +1,4 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module ListsFak.ListMonadTest where
 import ListsFak.ListMonad
 import Test.QuickCheck
@@ -25,10 +24,8 @@ cardProd2 xs ys = liftA2 (,) xs ys
 prop_cartProd1 xs ys = cartProd xs ys == cartProd1 xs ys
 prop_cartProd2 xs ys = cartProd xs ys == cardProd2 xs ys
 
-
 return []
 runTests = $quickCheckAll
 
 main = runTests >>= \passed -> if passed then exitSuccess
                                          else exitFailure
-

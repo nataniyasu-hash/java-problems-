@@ -1,11 +1,9 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module Lists.MapFilterTest where
 import Lists.MapFilter
 import Test.QuickCheck
 import Control.Monad
 import System.Exit(exitSuccess, exitFailure)
-
 
 sqrsExp = do
   x <- [0..6]
@@ -19,4 +17,3 @@ runTests = $quickCheckAll
 
 main = runTests >>= \passed -> if passed then exitSuccess
                                          else exitFailure
-

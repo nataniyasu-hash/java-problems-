@@ -1,5 +1,4 @@
 {-# LANGUAGE TemplateHaskell #-}
-
 module ListsFak.MoreFunTest where
 import qualified ListsFak.MoreFun as L
 import Test.QuickCheck
@@ -19,4 +18,3 @@ runTests = $quickCheckAll
 
 main = runTests >>= \passed -> if passed then exitSuccess
                                          else exitFailure
-
