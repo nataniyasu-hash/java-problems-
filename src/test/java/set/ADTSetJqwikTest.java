@@ -1,5 +1,6 @@
 package set;
 
+import fpinjava.Result;
 import list.JqwikUtils;
 import list.List;
 import net.jqwik.api.*;
@@ -156,6 +157,7 @@ public abstract class ADTSetJqwikTest {
 	public <A> boolean findEq_delete(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
 	}
+
 
 	// ∀s:Set : empty ⊆ s
 	@Property
