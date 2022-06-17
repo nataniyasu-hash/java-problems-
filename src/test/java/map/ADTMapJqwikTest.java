@@ -295,7 +295,7 @@ public abstract class ADTMapJqwikTest {
 
 	// ∀a:Map<K,V>, ∀b:Map<K,V>, ∀k:K :
 	// get(k,(a ∪ b)) = member(k,a)&&member(k,b)||member(k,a)?get(k,a)
-	//                                                       :member(k,b)?lookup(k,b)
+	//                                                       :member(k,b)?get(k,b)
 	//                                                                    :null
 	@Property
 	<K extends Comparable<K>,V>

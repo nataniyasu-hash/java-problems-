@@ -24,6 +24,10 @@ public interface Function<T, U> {
     throw new UnsupportedOperationException("Diese Methode muss ich wohl selber noch implementieren");
   }
 
+  static <T,U,V> Function<U,Function<T,V>> flip(Function<T,Function<U,V>> f) {
+    throw new UnsupportedOperationException("Diese Methode muss ich wohl selber noch implementieren");
+  }
+
   static <T, U, V> Function<T, V> andThen(Function<T, U> f, Function<U, V> g) {
     return x -> g.apply(f.apply(x));
   }
