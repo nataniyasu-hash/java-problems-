@@ -308,7 +308,7 @@ public abstract class ADTMapJqwikTest {
 	// ∀a:Map<K,V>, ∀b:Map<K,V>, ∀k:K :
 	// lookup(k,(a ∪ b)) = (member(k,a)&&member(k,b))||member(k,a)?lookup(k,a)
 	//                                                             :member(k,b)?lookup(k,b)
-	//                                                                         :Nothing
+	//                                                                         :Result.Empty
 	@Property
 	<K extends Comparable<K>,V>
 	boolean defOfUnionLookup(@ForAll("maps") Map<K,V> a,
@@ -328,7 +328,7 @@ public abstract class ADTMapJqwikTest {
 	}
 
 	// ∀a:Map<K,V>, ∀b:Map<K,V>, ∀k:K
-	// lookup(k,(a ∩ b)) = member(k,a)&&member(k,b)?lookup(k,a):Nothing
+	// lookup(k,(a ∩ b)) = member(k,a)&&member(k,b)?lookup(k,a):Result.Empty
 	@Property
 	<K extends Comparable<K>,V>
 	boolean defOfIntersectionLookup(@ForAll("maps") Map<K,V> a,
