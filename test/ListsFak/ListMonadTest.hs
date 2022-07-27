@@ -18,7 +18,7 @@ prodsOddExp = do
 prop_prodsOdd = prodsOdd == prodsOddExp
 
 cartProd1,cardProd2 :: [a] -> [b] -> [(a, b)]
-cartProd1 xs ys = ((,) <$> xs <*> ys)
+cartProd1 xs ys = (,) <$> xs <*> ys
 cardProd2 xs ys = liftA2 (,) xs ys
 
 prop_cartProd1 xs ys = cartProd xs ys == cartProd1 xs ys
