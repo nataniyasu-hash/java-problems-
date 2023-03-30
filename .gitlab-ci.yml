@@ -1,7 +1,6 @@
 image: haskell:8.10.7
 
 stages:
-  - pretest
   - functions
   - lists
   - optional
@@ -10,12 +9,6 @@ variables:
   STACK_ROOT: "${CI_PROJECT_DIR}/.stack-root"
   STACK_OPTS: "--system-ghc"
   DOCKER_AUTH_CONFIG: $CI_DOCKER_AUTH_CONFIG
-
-Pass requirements:
-  stage: pretest
-  image: git.mylab.th-luebeck.de:4181/inf2praktikum/haskelltestenvironment
-  script:
-    - StartEnvironment $CI_PROJECT_DIR
 
 operators:
   stage: functions
