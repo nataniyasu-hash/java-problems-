@@ -3,7 +3,7 @@
 Verwenden Sie das Haskell-Plugin für Intellij,
 so wie Tobias Werk es im Video erläutert:
 
-[Video](https://git.mylab.th-luebeck.de/inf/aufgaben/-/raw/master/HaskellInIntelliJ.mp4)
+[Video](https://git.mylab.th-luebeck.de/inf/aufgaben/-/raw/master/videos/HaskellInIntelliJ.mp4)
 
 [Projekte bauen und ausführen mit Haskell-Stack](Stack.md)
 
