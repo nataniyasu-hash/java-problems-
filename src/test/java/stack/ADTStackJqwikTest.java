@@ -137,7 +137,7 @@ public class ADTStackJqwikTest {
 		return false;
 	}
 
-	// // ∀s:Stack<A>, ∀xs:List<A> : pushAll(x:xs,s)= push(x,pushAll(xs,s)), falls s nicht leer
+  // ∀s:Stack<A>, ∀xs:List<A> : pushAll(xs,s) = push(head(xs), pushAll(tail(xs),s)) , falls xs nicht leer
 	@Property
 	<A> boolean pushAll(@ForAll("stacks") Stack<A> s, @ForAll("lists") List<A> xs) {
 		return false;
