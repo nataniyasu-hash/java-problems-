@@ -98,61 +98,61 @@ public abstract class ADTSetJqwikTest {
 		return false;
 	}
 	
-	// ∀s:Set, ∀x:A : size(insert(x,s)) 	=  !member(x,s) ? size(s)+1 : size(s)
+	// ∀s:Set<A>, ∀x:A : size(insert(x,s)) = !member(x,s) ? size(s)+1 : size(s)
 	@Property
 	public <A> boolean size_insert(@ForAll("sets") Set<A> s, @ForAll("as") A x) {
 		return false;
 	}
 		
-  // ∀s:Set, ∀x:A, ∀y:A : member(y,delete(x,s))	=  x=y ? false : member(y,s)
+  // ∀s:Set<A>, ∀x:A, ∀y:A : member(y,delete(x,s))	= x=y ? false : member(y,s)
 	@Property
 	public <A> boolean member_delete(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
 	}
 	
-	// ∀x:A : member(x,empty)=false
+	// ∀x:A : member(x,empty) = false
 	@Property
 	public <A extends Comparable<A>> boolean member_empty(@ForAll("as") A x) {
 		return false;
 	}
 	
-	// ∀s:Set, ∀x:A, ∀y:A :  member(y,insert(x,s)) 	=  x=y ? true  : member(y,s)
+	// ∀s:Set<A>, ∀x:A, ∀y:A : member(y,insert(x,s)) = x=y ? true : member(y,s)
 	@Property
 	public <A> boolean member_insert(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
 	}
 	
-	// ∀s:Set, ∀x:A, ∀y:A : insert(y,insert(x,s))	=  x=y ? insert(y,s) : insert(x,insert(y,s))
+	// ∀s:Set<A>, ∀x:A, ∀y:A : insert(y,insert(x,s))	= x=y ? insert(y,s) : insert(x,insert(y,s))
 	@Property
 	public <A> boolean insert_insert(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
 	}
 		
-	// ∀s:Set, ∀x:A, ∀y:A : insert(y,insert(x,s))  = insert(x,insert(y,s))
+	// ∀s:Set<A>, ∀x:A, ∀y:A : insert(y,insert(x,s)) = insert(x,insert(y,s))
 	@Property
 	public <A> boolean insertKommutativ(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
 	}
 	
-	// ∀x:A : delete(x,empty) 	= empty
+	// ∀x:A : delete(x,empty) = empty
 	@Property
 	public <A extends Comparable<A>> boolean delete_empty(@ForAll("as") A x) {
 		return false;
 	}
 
-	// ∀s:Set, ∀x:A, ∀y:A : delete(y,insert(x,s)) 	=  x=y ? delete(y,s) : insert(x,delete(y,s))
+	// ∀s:Set<A>, ∀x:A, ∀y:A : delete(y,insert(x,s)) = x=y ? delete(y,s) : insert(x,delete(y,s))
 	@Property
 	public <A> boolean delete_insert(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
 	}
 
-	// ∀s:Set, ∀x:A, ∀y:A : findEq(y,insert(x,s)) 	=  x=y ? x : findEq(y,s)
+	// ∀s:Set<A>, ∀x:A, ∀y:A : findEq(y,insert(x,s)) = x=y ? x : findEq(y,s)
 	@Property
 	public <A> boolean findEq_insert(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
 	}
 	
-	// ∀s:Set, ∀x:A, ∀y:A : findEq(y,delete(x,s))	=  x=y ? null : findEq(y,s)
+	// ∀s:Set<A>, ∀x:A, ∀y:A : findEq(y,delete(x,s))	= x=y ? null : findEq(y,s)
 	@Property
 	public <A> boolean findEq_delete(@ForAll("sets") Set<A> s, @ForAll("as") A x, @ForAll("as") A y) {
 		return false;
@@ -177,13 +177,13 @@ public abstract class ADTSetJqwikTest {
 		return false;
 	}
 
-	//  ∀s:Set, ∀x:A : disjoint({x}, s) = true , falls  x ∉ s
+	//  ∀s:Set<A>, ∀x:A : disjoint({x}, s) = true , falls  x ∉ s
 	@Property
 	public <A extends Comparable> boolean disjoint_elem(@ForAll("sets") Set<A> s, @ForAll("as") A x) {
 		return false;
 	}
 
-	// ∀a:Set, ∀b:Set : |A ∪ B| = |A| + |B| , falls disjoint(A, B) = true
+	// ∀s1:Set<A>, ∀s2:Set<A> : |s1 ∪ s2| = |s1| + |s2| , falls disjoint(s1, s2) = true
 	@Property
 	public <A> boolean disjoint_size(@ForAll("sets") Set<A> a, @ForAll("sets") Set<A> b){
 		return false;
@@ -204,14 +204,14 @@ public abstract class ADTSetJqwikTest {
 		return false;
 	}
 
-	// ∀a:Set, ∀b:Set :  a ∩ b = b ∩ a
+	// ∀a:Set, ∀b:Set : a ∩ b = b ∩ a
 	@Property
 	public <A> boolean kommutativGesetzIntersect(@ForAll("sets") Set<A> a,
 																							 @ForAll("sets") Set<A> b) {
 		return false;
 	}
 
-	// ∀a:Set, ∀b:Set, ∀c:Set :  a ∪ (b ∪ c) = (a ∪ b) ∪ c
+	// ∀a:Set, ∀b:Set, ∀c:Set : a ∪ (b ∪ c) = (a ∪ b) ∪ c
 	@Property
 	public <A> boolean assoziativGesetzUnion(@ForAll("sets") Set<A> a,
 																					 @ForAll("sets") Set<A> b,
@@ -220,7 +220,7 @@ public abstract class ADTSetJqwikTest {
 	}
 
 
-	// ∀a:Set, ∀b:Set, ∀c:Set :  a ∩ (b ∩ c) = (a ∩ b) ∩ c
+	// ∀a:Set, ∀b:Set, ∀c:Set : a ∩ (b ∩ c) = (a ∩ b) ∩ c
 	@Property
 	public <A> boolean assoziativGesetzIntersect(@ForAll("sets") Set<A> a,
 																							 @ForAll("sets") Set<A> b,
@@ -228,7 +228,7 @@ public abstract class ADTSetJqwikTest {
 		return false;
 	}
 
-	// ∀a:Set, ∀b:Set, ∀c:Set :  a ∪ (b ∩ c) = (a ∪ b) ∩ (a ∪ c)
+	// ∀a:Set, ∀b:Set, ∀c:Set : a ∪ (b ∩ c) = (a ∪ b) ∩ (a ∪ c)
 	@Property
 	public <A> boolean distributivGesetz(@ForAll("sets") Set<A> a,
 																       @ForAll("sets") Set<A> b,

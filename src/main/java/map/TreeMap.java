@@ -2,7 +2,6 @@ package map;
 
 import fpinjava.Function;
 import list.List;
-import set.Set;
 import set.SortedSet;
 import set.TreeSet;
 import tuple.Tuple;
