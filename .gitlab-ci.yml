@@ -68,6 +68,11 @@ BST:
   script:
     - mvn $POM -Dtest=tree.bst.TreeJqwikTest test
 
+MapGraph:
+  stage: collection
+  script:
+    - mvn $POM -Dinclude.tests=graphMap.map.MapGraphJqwikTest test
+
 deploy-prod:
   stage: deploy
   script:
