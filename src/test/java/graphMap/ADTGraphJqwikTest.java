@@ -1,10 +1,7 @@
 package graphMap;
 
-import fpinjava.Result;
 import list.List;
-import map.ListMap;
 import net.jqwik.api.*;
-import set.ListSet;
 import tuple.Tuple;
 
 import static graphMap.ExGraphs.*;

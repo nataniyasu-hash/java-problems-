@@ -53,11 +53,6 @@ TreeSet:
   script:
     - mvn $POM -Dinclude.tests=set.TreeSetJqwikTest test
 
-ListMap:
-  stage: collection
-  script:
-    - mvn $POM -Dinclude.tests=map.ListMapJqwikTest test
-
 TreeMap:
   stage: collection
   script:
