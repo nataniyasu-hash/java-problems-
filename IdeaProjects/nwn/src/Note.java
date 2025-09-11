@@ -20,5 +20,7 @@ public class Note {
     }
     public void setConetnt (String content){
         this.content = content ;
-    }
+
 }
+}
+
