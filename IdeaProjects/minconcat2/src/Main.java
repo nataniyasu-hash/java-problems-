@@ -1,44 +1,63 @@
 /**
+ * ## Armstrongzahlen
  *
- *  ## Zeichenketten aneinander hängen
+ * Ja, so etwas gibt es. Eine Armstrongzahl ist eine Zahl,
+ * deren Summe ihrer Stellen, jeweils potenziert mit ihrer Stellenanzahl,
+ * wieder die Zahl selbst ergibt.
  *
- * Entwickeln Sie bitte eine Methode `minConcat()`,
- * die zwei Zeichenketten unterschiedlicher Länge
- * aneinander hängt. Dabei soll die längere der
- * beiden Zeichenketten auf die Länge der kürzeren
- * Zeichenkette so gekürzt werden, dass die ersten
- * Zeichen der Zeichenkette nicht in das Resultat
- * übernommen werden.
+ * Z.B.: $153 = 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153$
  *
- * Beispielaufrufe finden Sie in der `main()`-Methode.
+ * Entwickeln Sie nun bitte eine Methode `isArmstrong()`, die prüft,
+ * ob eine Zahl eine Armstrongzahl ist.
+ *
+ * Entwickeln Sie zusätzlich eine Methode `countArmstrongs()` die
+ * angibt, wieviele Armstrongzahlen es bis zu einer oberen
+ * Schranke gibt.
+ *
+ * Aufruf Beispiele finden Sie in der `main()`-Methode.
+ *
+ * __Hinweise:__
+ *
+ * - https://de.wikipedia.org/wiki/Narzisstische_Zahl
+ * - Mittels % 10 koennen Sie den Wert der letzten Ziffer bestimmen.
+ * - Mittels / 10 koennen Sie eine Zahl um eine Stelle nach rechts "rausschieben".
  *
  */
 class Main {
-    public static String minConcat(String a , String b ) {
-    int lengthA = a.length();
-    int lengthB = b.length();
-    String together = "";
-    if (lengthA > lengthB) {
-        String start = a.substring(lengthA - lengthB);
-        String ende = start + b;
-        together = ende;
-    }
-        if (lengthB > lengthA) {
-            String start = b.substring(lengthB - lengthA);
-            String ende =  a + start;
-            together = ende;
+    public static boolean isArmstrong(int a) {
+        int length = String.valueOf(a).length();
+        int summe = 0;
+        int zahl = a;
+
+        while (zahl > 0) {
+            int ziffer;
+            ziffer = zahl % 10;
+            double potenz ;
+            potenz = Math.pow(ziffer,length);
+            summe += potenz;
+            zahl /= 10;
         }
-        return together;
+        if (summe == a) return true;
+        return false;
+    }
+    public static int countArmstrongs(int a) {
+        int count = 0;
+
+        for (int i = 0; i <= a; i++) {
+            if (isArmstrong(i)) count++;
+        }
+        return count;
     }
 
     public static void main(String[] args) {
 
-        String resultat = minConcat("Hello", "Hi");
-        System.out.println(resultat); // => "loHi"
+        boolean result = isArmstrong(153);
+        System.out.println(result); // => true
+        System.out.println(isArmstrong(999)); // => false
 
-        System.out.println(minConcat("Hello", "java"));
-        // => "ellojava"
-        System.out.println(minConcat("java", "Hello"));
-        // => "javaello"
+        int n = countArmstrongs(100);
+        System.out.println(n); // => 10
+        System.out.println(countArmstrongs(153)); // => 11
+        System.out.println(countArmstrongs(1000)); // => 14
     }
 }
