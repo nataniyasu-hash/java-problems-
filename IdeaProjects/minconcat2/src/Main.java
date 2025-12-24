@@ -1,31 +1,40 @@
 /**
- * ## Cats and Dogs
+ * ## `missingChar()``
  *
- * Entwickeln Sie bitte eine Methode `catsDogs()`,
- * die prüft, ob in einer Zeichenkette gleich häufig
- * die Zeichenketten "cat" und "dog" vorkommen.
+ * Entwickeln Sie bitte eine Methode `missingChar()`, die aus einer
+ * Zeichenkette eine neue Zeichenkette erzeugt, in der das n-te Zeichen fehlt.
  *
- * Wenn weder "cat" noch "dog" vorkommen, ist dies als
- * nicht gleich häufig zu werten.
  *
- * Beispielaufrufe finden Sie in der `main()`-Methode.
+ * __Achtung:__
+ * Der Wert von *n* muss nicht in der ursprünglichen Zeichenkette liegen.
  *
- * Challenge: Lösen Sie die Aufgabe ohne Schleifen.
+ * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
+ * Challenge: Versuchen Sie diese Aufgabe ohne Schleifen zu lösen.
+ *
+ * In der Vorlesung wurde erläutert, was Methoden sind und wie sie funktionieren.
+ * Mit diesem Wissen können Sie ab sofort die Methodenköpfe selber ableiten.
  */
 class Main {
-    public static boolean catsDogs(String a) {
-        if (a.length() <= 3) return false;
-        int rad = a.replaceAll("dog", "").length();
-        int rac = a.replaceAll("cat", "").length();
-        if (rad ==  rac) return true;
-        return false;
-    }
+    public static String missingChar(String word, int a) {
+        String missingChar = "";
+        if (a > word.length()) return word;
+        char[] chars = word.toCharArray();
+        for(int i = 0; i < chars.length; i++) {
+            if ((i) != a) {
+                missingChar += chars[i];
+            }
+        }
+        return missingChar;
+        }
+
 
     public static void main(String[] args) {
-        boolean r = catsDogs("catdog");
-        System.out.println(r); // => true
-        System.out.println(catsDogs("catcat")); // => false
-        System.out.println(catsDogs("1cat1cadodog")); // => true
+        String s = missingChar("Hello", 3);
+        System.out.println(s); // => Helo
+        System.out.println(missingChar("Hello", 1));  // => Hllo
+        System.out.println(missingChar("Hello", 4));  // => Hell
+        System.out.println(missingChar("Hello", -1)); // => Hello
+        System.out.println(missingChar("Hello", 10)); // => Hello
     }
 }
