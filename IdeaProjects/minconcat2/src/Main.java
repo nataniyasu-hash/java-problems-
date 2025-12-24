@@ -1,40 +1,53 @@
+import java.util.List;
+import java.util.Arrays;
+
 /**
- * ## `missingChar()``
  *
- * Entwickeln Sie bitte eine Methode `missingChar()`, die aus einer
- * Zeichenkette eine neue Zeichenkette erzeugt, in der das n-te Zeichen fehlt.
+ * ## `zeroMax()`
  *
+ * Entwickeln Sie nun bitte eine Methode `zeroMax()`, die ein Integer Array aus
+ * einer übergebenen Liste von Integer Werten erzeugt, bei der jeder Nullwert
+ * (0, also nicht null!!!)
+ * in der Liste durch den größten positiven Wert rechts von der Null ersetzt wird.
+ * Wenn es rechts von der Null keinen größten positiven Wert gibt, wird die Null
+ * als Null belassen.
  *
- * __Achtung:__
- * Der Wert von *n* muss nicht in der ursprünglichen Zeichenkette liegen.
+ * Aufruf-Beispiele finden Sie in der `main()`-Methode.
  *
- * Aufrufbeispiele finden Sie in der `main()`-Methode.
+ * Hinweis: Wenn Ihnen der Datentyp List (noch) nichts sagt, fragen Sie KIRA
+ * was das für ein Datentyp ist und wie man mit diesem umgeht.
  *
- * Challenge: Versuchen Sie diese Aufgabe ohne Schleifen zu lösen.
- *
- * In der Vorlesung wurde erläutert, was Methoden sind und wie sie funktionieren.
- * Mit diesem Wissen können Sie ab sofort die Methodenköpfe selber ableiten.
  */
-class Main {
-    public static String missingChar(String word, int a) {
-        String missingChar = "";
-        if (a > word.length()) return word;
-        char[] chars = word.toCharArray();
-        for(int i = 0; i < chars.length; i++) {
-            if ((i) != a) {
-                missingChar += chars[i];
+public class Main {
+    public static int[]  zeroMax(List<Integer> list) {
+        int[] result = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == 0) {
+                int zahl = 0;
+                for (int k = i +1; k < list.size(); k++) {
+                    if (list.get(k) > zahl) {
+                        zahl = list.get(k);
+                    }
+                }
+                result[i] = zahl;
+            } else {
+                result[i] = list.get(i);
             }
         }
-        return missingChar;
+        return result;
         }
+
 
 
     public static void main(String[] args) {
-        String s = missingChar("Hello", 3);
-        System.out.println(s); // => Helo
-        System.out.println(missingChar("Hello", 1));  // => Hllo
-        System.out.println(missingChar("Hello", 4));  // => Hell
-        System.out.println(missingChar("Hello", -1)); // => Hello
-        System.out.println(missingChar("Hello", 10)); // => Hello
+        List<Integer> list = Arrays.asList(0, 5, 0, 3);
+        int[] result = zeroMax(list);
+        System.out.println(Arrays.toString(result));        // => [5, 5, 3, 3]
+
+        list = Arrays.asList(0, 4, 0, 3);
+        System.out.println(Arrays.toString(zeroMax(list))); // => [4, 4, 3, 3]
+
+        list = Arrays.asList(0, 1, 0);
+        System.out.println(Arrays.toString(zeroMax(list)));  // => [1, 1, 0]
     }
 }
