@@ -1,44 +1,49 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * ## Sortierung von Arrays prüfen
+ * ## Palindrome in Zeichenketten bestimmen
  *
- * Sie sollen nun eine Methode `scoresIncreasing()` entwickeln,
- * die für ein gegebenes Array prüft, ob alle Wert in diesem
- * Array aufsteigend sortiert sind oder das Array leer ist.
+ * Palindrome sind Zeichenketten, die von vorne und hinten
+ * gelesen, dasselbe Wort ergeben (z.B. "stets"). Die Groß-/
+ * Kleinschreibung soll dabei ignoriert werden.
+ *
+ * Ein Wort ist eine zusammenhängende Zeichenkette, welches 
+ * durch ein oder mehrere Leerzeichen von anderen Worten in
+ * einer Zeichenkette getrennt ist.
+ *
+ * Entwickeln Sie nun bitte eine Methode `palindromes()`,
+ * um in einem String alle Palindromwörter zu bestimmen
+ * und diese Palindrome als Liste von Zeichenketten zurückzugeben.
  *
  * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
- * __Hinweis:__
- *
- * - Sehen Sie sich Arrays in Unit 03 noch einmal an.
- *
  */
 class Main {
-    public static boolean scoresIncreasing(int[] array) {
-        if (array.length == 0) return false;
-    int temp = array[0];
-
-    for (int i = 1; i < array.length; i++) {
-        if (temp > array[i]) {
-            return false;
+    public static String drehen (String wort) {
+        String gedreht = "";
+        char[] chars = wort.toLowerCase().toCharArray();
+        for (int i = chars.length - 1; i >= 0; i--) {
+            gedreht += chars[i];
         }
-        temp = array[i];
+        return gedreht;
     }
-    return true;
+    public static List<String> palindromes(String words) {
+        List<String> gedreht = new ArrayList<>();
+        String[] array = words.split(" ");
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].toLowerCase().equals(drehen(array[i]))) {
+                gedreht.add(array[i]);
+            }
+        }
+        return gedreht;
     }
 
     public static void main(String[] args) {
-        int[] d1 = {1, 3, 4};
-
-        boolean increasing = scoresIncreasing(d1);
-        System.out.println(increasing); // => true
-
-        int[] d2 = {1, 3, 2};
-        System.out.println(scoresIncreasing(d2)); // => false
-
-        int[] d3 = {1, 1, 4};
-        System.out.println(scoresIncreasing(d3)); // => true
-
-        int[] d4 = {1};
-        System.out.println(scoresIncreasing(d4)); // => true
+        List<String> palindromes = palindromes("Es ist stets dasselbe Beispiel");
+        System.out.println(palindromes); // => ["stets"]
+        System.out.println(palindromes("Regallager")); // => ["Regallager"]
+        System.out.println(palindromes("no palinedromes")); // => []
+        System.out.println(palindromes("Natan ist stets weise")); // => ["Natan", "stets"]
     }
 }
