@@ -1,39 +1,43 @@
 /**
- * ## Zeichenketten verarbeiten mit `everyNth()`
+ * ## Aufsteigend sortierte Tripple finden
  *
- * Entwickeln Sie nun bitte eine Methode `everyNth()`, die für eine Zeichenkette $s$
- * nur jedes n.te Zeichen zurück liefert.
- * Bei $n = 3$ sollen also nur die Zeichen 0, 3, 6, ... und so weiter zurückgegeben werden.
- * Fuer $n <= 0$ soll die leere Zeichenkette zurückgegeben werden.
+ * Schreiben Sie nun bitte eine Methode `trippleUp()`
+ * die in einem Integer-Array prüft, ob dieses
+ * drei aufsteigende, benachbarte Werte wie bspw. 1, 2, 3,
+ * oder auch 24, 25, 26 beinhaltet.
  *
- * Aufrufbeispiele finden Sie in der `main()-Methode`.
- *
- * __Hinweis:__
- *
- * - Achtung: Diese Aufgabe ist anfällig für Endlosschleifen.
- * - Erhalten Sie in VPL eine Out-of-Memory oder "getötet"-Fehlermeldung,
- *   haben Sie vermutlich eine Endlosschleife gebaut.
+ * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
  */
 class Main {
-    public static String everyNth(String word, int a) {
-        String wort = "";
-        if(a <= 0) return "\"\"";
-        char[] chars = word.trim().toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if ((i ) % a == 0) {
-                wort += chars[i];
+    public static boolean trippleUp(int[] array) {
+        int count = 1;
+        int erste = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if(erste + 1 == array[i]) {
+                count++;
+                erste = array[i];
+            } else {
+                if (count >= 3) return true;
+                if(count < 3) {
+                    count = 1;
+                    erste = array[i];
+                }
             }
         }
-        return wort;
+        if (count >= 3 ) return true;
+        return false;
     }
 
     public static void main(String[] args) {
-        String result = everyNth("Miracle", 2);
-        System.out.println(result); // => "Mrce"
-        result = everyNth("Miracle", 0);
-        System.out.println(result); // => ""
-        System.out.println(everyNth("abcdefg", 2)); // => "aceg"
-        System.out.println(everyNth("abcdefg", 3)); // => "adg"
+        int[] a1 = {1, 4, 5, 6, 2};
+        int[] a2 = {1, 2, 3};
+        int[] a3 = {1, 2, 4};
+        int[] a4 = {3, 2, 1};
+
+        System.out.println(trippleUp(a1)); // => true
+        System.out.println(trippleUp(a2)); // => true
+        System.out.println(trippleUp(a3)); // => false
+        System.out.println(trippleUp(a4)); // => false
     }
 }
