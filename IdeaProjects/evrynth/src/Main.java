@@ -1,55 +1,43 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 /**
- * ## Blöcke in Zeichenketten bestimmen.
+ * ## Listen nach geraden und ungeraden Zahlen ordnen
  *
- * Entwickeln Sie nun bitte eine Methode `blocks()`,
- * um in einem String alle Blöcke gleicher aufeinander folgender Zeichen
- * zu bestimmen.
+ * Entwickeln Sie nun bitte eine Methode namens `evenOdd()`,
+ * die eine Liste auf Basis einer bestehenden Liste von Integern erzeugt.
  *
- * Aufrufbeispiele finden Sie in der `main()`-Methode.
+ * - In der neuen Liste müssen erst alle geraden Werte der ursprünglichen Liste
+ *   stehen, erst dann sollen die ungeraden Werte folgen.
+ * - Die Reihenfolge der ursprünglichen Liste soll innerhalb der geraden und ungeraden
+ *   Werte aber erhalten bleiben.
+ *
+ * Aufrufbeispiele finden sich in der `main()`-Methode.
  *
  */
 class Main {
-    public static List<String> blocks(String words) {
-        List<String> list = new ArrayList<>();
-        if (words.length() == 0) return list;
-        int count = 1;
-        char temp = words.charAt(0);
-        for (int i = 1; i < words.length(); i++) {
-            if (words.charAt(i) == temp) {
-                count++;
-                temp = words.charAt(i);
+    public static List<Integer> evenOdd(List<Integer> list) {
+        List<Integer> even = new ArrayList<>();
+        List<Integer> odd = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) % 2 == 0) {
+                even.add(list.get(i));
             } else {
-                if (count >= 2) {
-                    String ekub = String.valueOf(temp).repeat(count);
-                    list.add(ekub);
-                }
-                count = 1;
-                temp = words.charAt(i);
+                odd.add(list.get(i));
             }
 
         }
-        if (count >= 2) {
-            String ekub = String.valueOf(temp).repeat(count);
-            list.add(ekub);
+        even.addAll(odd);
+        return even;
         }
 
 
-        return list;
-
+    public static void main(String[] args) {
+        List<Integer> result = evenOdd(Arrays.asList(1, 2, 3, 4, 5, 6));
+        System.out.println(result); // => [2, 4, 6, 1, 3, 5]
+        System.out.println(evenOdd(Arrays.asList(5, 1, 3))); // => [5, 1, 3]
+        System.out.println(evenOdd(Arrays.asList(4, 2, 6))); // => [4, 2, 6]
     }
-
-
-        public static void main (String[]args){
-            List<String> blocks = blocks("Hello faaantastic world");
-            System.out.println(blocks); // => ["ll", "aaa"]
-            System.out.println(blocks("aaabccdeeeefaaa")); // => ["aaa", "cc", "eeee", "aaa"]
-            System.out.println(blocks("This is an example")); // => []
-            System.out.println(blocks("Another  example ...")); // => ["  ", "..."]
-            System.out.println(blocks("")); // => []
-        }
-    }
-
-
+}
