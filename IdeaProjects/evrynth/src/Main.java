@@ -1,37 +1,41 @@
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 /**
- * ## Worthäufigkeit in Zeichenketten bestimmen
  *
- * Entwickeln Sie nun eine Methode `wordCount()`, die die absolute
- * Häufigkeit von Worten in einem Text mittels eines Mappings zählt.
- * Worte sind durch ein oder mehrere Whitespace Zeichen
- * (Leerzeichen, Tabulatoren, Linebreaks, etc.) voneinander getrennt.
- * Worte sollen case-insensitiv gezählt werden.
+ * ## `sortWords()`
+ *
+ * Entwickeln Sie bitte eine Methode `sortWords()`, die aus einer
+ * Zeichenkette eine Liste von alphabetisch sortierten Worten erzeugt.
+ * Ein Wort ist durch ein oder mehrere Leerzeichen von anderen Worten
+ * getrennt.
+ *
+ * Treten Worte mehrfach in der Zeichenkette auf, sollen diese nur
+ * einmal in der Liste alphabetisch sortierter Wörter auftreten.
+ * Worte sind Case-sensitiv zu handhaben.
+ *
+ * __Hinweis:__
+ * Denken Sie über den Einsatz einer TreeMap nach.
+ * Eine TreeMap erhält das Ordnungskriterium eines Schlüssels.
  *
  * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
- * __Hinweis:__
- *
- * - In regulären Ausdrücken können Sie alle Whitespace Zeichen
- *   mit `"\\s"` selektieren.
- *
  */
 class Main {
-    public static Map<String, Integer> wordCount(String words) {
-        Map<String, Integer> count = new HashMap<>();
-        String[] array = words.trim().toLowerCase().split("\\s+");
-        for (int i =0; i < array.length; i++) {
-            count.put(array[i], count.getOrDefault(array[i], 0) + 1);
+    public static List<String> sortWords(String words) {
+        Set<String> sets = new TreeSet<>();
+        List<String> list = new ArrayList();
+        if ( words.length() == 0) { list.add(""); return list; }
+        String[] array = words.split("\\s+");
+        for (int i = 0; i < array.length; i++) {
+            sets.add(array[i]);
         }
-        return count;
+        list.addAll(sets);
+        return list;
     }
 
     public static void main(String[] args) {
-        Map<String, Integer> result = wordCount("aa BB cC Aa Cc Bb aA AA");
-        System.out.println(result); // => { "aa": 4, "bb": 2, "cc": 2 }
-        System.out.println(wordCount("Ein kleines Beispiel"));
-        // => { "ein": 1, "kleines": 1, "beispiel": 1 }
+        List<String> words = sortWords("Dies ist nur ein Beispiel");
+        System.out.println(words); // => [Beispiel, Dies, ein, ist, nur]
+        System.out.println(sortWords("Abc Abc Abc"));  // => [Abc]
+        System.out.println(sortWords("abc Abc"));  // => [Abc, abc]
     }
 }
