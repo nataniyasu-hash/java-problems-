@@ -1,43 +1,37 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * ## Listen nach geraden und ungeraden Zahlen ordnen
+ * ## Worthäufigkeit in Zeichenketten bestimmen
  *
- * Entwickeln Sie nun bitte eine Methode namens `evenOdd()`,
- * die eine Liste auf Basis einer bestehenden Liste von Integern erzeugt.
+ * Entwickeln Sie nun eine Methode `wordCount()`, die die absolute
+ * Häufigkeit von Worten in einem Text mittels eines Mappings zählt.
+ * Worte sind durch ein oder mehrere Whitespace Zeichen
+ * (Leerzeichen, Tabulatoren, Linebreaks, etc.) voneinander getrennt.
+ * Worte sollen case-insensitiv gezählt werden.
  *
- * - In der neuen Liste müssen erst alle geraden Werte der ursprünglichen Liste
- *   stehen, erst dann sollen die ungeraden Werte folgen.
- * - Die Reihenfolge der ursprünglichen Liste soll innerhalb der geraden und ungeraden
- *   Werte aber erhalten bleiben.
+ * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
- * Aufrufbeispiele finden sich in der `main()`-Methode.
+ * __Hinweis:__
+ *
+ * - In regulären Ausdrücken können Sie alle Whitespace Zeichen
+ *   mit `"\\s"` selektieren.
  *
  */
 class Main {
-    public static List<Integer> evenOdd(List<Integer> list) {
-        List<Integer> even = new ArrayList<>();
-        List<Integer> odd = new ArrayList<>();
-
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) % 2 == 0) {
-                even.add(list.get(i));
-            } else {
-                odd.add(list.get(i));
-            }
-
+    public static Map<String, Integer> wordCount(String words) {
+        Map<String, Integer> count = new HashMap<>();
+        String[] array = words.trim().toLowerCase().split("\\s+");
+        for (int i =0; i < array.length; i++) {
+            count.put(array[i], count.getOrDefault(array[i], 0) + 1);
         }
-        even.addAll(odd);
-        return even;
-        }
-
+        return count;
+    }
 
     public static void main(String[] args) {
-        List<Integer> result = evenOdd(Arrays.asList(1, 2, 3, 4, 5, 6));
-        System.out.println(result); // => [2, 4, 6, 1, 3, 5]
-        System.out.println(evenOdd(Arrays.asList(5, 1, 3))); // => [5, 1, 3]
-        System.out.println(evenOdd(Arrays.asList(4, 2, 6))); // => [4, 2, 6]
+        Map<String, Integer> result = wordCount("aa BB cC Aa Cc Bb aA AA");
+        System.out.println(result); // => { "aa": 4, "bb": 2, "cc": 2 }
+        System.out.println(wordCount("Ein kleines Beispiel"));
+        // => { "ein": 1, "kleines": 1, "beispiel": 1 }
     }
 }
