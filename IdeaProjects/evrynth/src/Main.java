@@ -2,46 +2,54 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ## Dezimalzahlen in Zeichenketten bestimmen
+ * ## Blöcke in Zeichenketten bestimmen.
  *
- * Entwickeln Sie nun bitte eine Methode `numbers()`,
- * um in einem String alle Dezimalzahlen zu bestimmen
- * und diese als Liste von Integer Werten zurückzugeben.
+ * Entwickeln Sie nun bitte eine Methode `blocks()`,
+ * um in einem String alle Blöcke gleicher aufeinander folgender Zeichen
+ * zu bestimmen.
  *
  * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
- * __Hinweise:__
- *
- * - Die Java-Methode `boolean Character.isDigit(char)` prüft,
- *   ob ein Zeichen eine Ziffer ('0', '1', .. '9') ist.
- * - Die Java-Methode `int Integer.parseInt(String)` konvertiert eine
- *   Zeichenkette in einen `int`-Wert (z.B. "101" -> 101).
  */
 class Main {
-    public static List<Integer> numbers(String zeichnen) {
-       List<Integer> numbers = new ArrayList<>();
-       int i = 0;
+    public static List<String> blocks(String words) {
+        List<String> list = new ArrayList<>();
+        if (words.length() == 0) return list;
+        int count = 1;
+        char temp = words.charAt(0);
+        for (int i = 1; i < words.length(); i++) {
+            if (words.charAt(i) == temp) {
+                count++;
+                temp = words.charAt(i);
+            } else {
+                if (count >= 2) {
+                    String ekub = String.valueOf(temp).repeat(count);
+                    list.add(ekub);
+                }
+                count = 1;
+                temp = words.charAt(i);
+            }
 
-       while (i < zeichnen.length()) {
-           if (Character.isDigit(zeichnen.charAt(i))) {
-               int start = i;
-               while ( i < zeichnen.length() && Character.isDigit(zeichnen.charAt(i))) {
-                   i++;
-               }
-               String ekub = zeichnen.substring(start, i);
-               numbers.add(Integer.parseInt(ekub));
-           }
-           i++;
-       }
-       return numbers;
+        }
+        if (count >= 2) {
+            String ekub = String.valueOf(temp).repeat(count);
+            list.add(ekub);
+        }
+
+
+        return list;
 
     }
 
-    public static void main(String[] args) {
-        List<Integer> values = numbers("This is 1 world");
-        System.out.println(values); // => [1]
-        System.out.println(numbers("no numbers")); // => []
-        System.out.println(numbers("1 12 123 1234")); // => [1, 12, 123, 1234]
-        System.out.println(numbers("ab1c23ef45gh")); // => [1, 23, 45]
+
+        public static void main (String[]args){
+            List<String> blocks = blocks("Hello faaantastic world");
+            System.out.println(blocks); // => ["ll", "aaa"]
+            System.out.println(blocks("aaabccdeeeefaaa")); // => ["aaa", "cc", "eeee", "aaa"]
+            System.out.println(blocks("This is an example")); // => []
+            System.out.println(blocks("Another  example ...")); // => ["  ", "..."]
+            System.out.println(blocks("")); // => []
+        }
     }
-}
+
+
