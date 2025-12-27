@@ -1,45 +1,39 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * ## checkBrackets()
+ * ## `missingWord()`
  *
- * Eine vollständige Klammerung bedeutet: Jeder geöffneten Klammer
- * muss eine schließende Klammer folgen. Darüber hinaus müssen
- * die runden Klammern korrekt verschachtelt sein. Andere Zeichen
- * sind zu ignorieren.
+ * Entwickeln Sie bitte eine Methode `missingWord()`, die aus einer
+ * Zeichenkette eine Liste von Worten, allerdings ohne das n-te Wort, erzeugt.
+ * Ein Wort ist durch ein oder mehrere Leerzeichen von anderen Worten
+ * getrennt.
  *
- * Schreiben Sie nun eine Methode `checkBrackets()`, die prüft, ob eine
- * Zeichenkette den oben angegebenenen Regeln einer vollständigen
- * Klammerung entspricht oder nicht.
+ * __Achtung:__
+ * Das *n*-te Wort muss nicht existieren.
+ *
+ * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
  */
-public class Main {
-    public static boolean checkBrackets(String zeichnen) {
-        String brackets = "";
-        for (int i = 0; i < zeichnen.length(); i++) {
-            if (zeichnen.charAt(i) == '(' || zeichnen.charAt(i) == ')')
-                brackets += zeichnen.charAt(i);
-        }
-        if (brackets.startsWith(")")) return false;
-        if (brackets.endsWith("(")) return false;
+class Main {
+    public static List<String> missingWord(String words, int a ) {
+        List<String> list = new ArrayList<>();
+        String[] array = words.split("\\s+");
 
-        int counter = 0;
-        for (int j = 0; j < brackets.length(); j++) {
-            if (brackets.charAt(j) == '(')
-                counter++;
-            if (brackets.charAt(j) == ')') counter--;
-            if (counter < 0) return false;
+        for (int i = 0; i < array.length; i++) {
+            if (i != a) {
+                list.add(array[i]);
+            }
         }
-        if (counter < 0 || counter > 0) return false;
-        return true;
+        return list;
     }
 
-
     public static void main(String[] args) {
-
-        boolean check = checkBrackets("()");
-        System.out.println(check); // => true
-        System.out.println(checkBrackets("(()(a)(()((c))))")); // => true
-
-        System.out.println(checkBrackets("(()")); // => false
-        System.out.println(checkBrackets("a (()())a)")); // => false
+        List<String> words = missingWord("Dies ist nur ein Beispiel", 2);
+        System.out.println(words); // => [Dies, ist, ein, Beispiel]
+        System.out.println(missingWord("Hello World", 1));  // => [Hello]
+        System.out.println(missingWord("Hello World", 0));  // => [World]
+        System.out.println(missingWord("Hello World", 2));  // => [Hello World]
+        System.out.println(missingWord("Hello World", -1)); // => [Hello World]
     }
 }
