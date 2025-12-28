@@ -1,77 +1,100 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * ## Primzahlen bestimmen
+ * ## [Leetspeech](https://de.wikipedia.org/wiki/Leetspeak)
  *
- * Eine Primzahl ist eine natürliche Zahl > 1, die nur durch sich
- * selbst und 1 teilbar ist. Sie sollen nun Primzahlen
- * generieren und tabellarisch auf der Konsole ausgeben.
+ * Leetspeak (oder 1337) bezeichnet im Netzjargon das Ersetzen
+ * von Buchstaben durch ähnlich aussehende Ziffern sowie
+ * Sonderzeichen. Die häufige Schreibweise 1337 für Leetspeak
+ * entstand aus dem englischen Wort "Elite". Es wurde dabei erst
+ * zu Eleet verballhornt und dann zu 'leet abgekürzt, was im
+ * Leetspeak als 1337 geschrieben wird.
  *
- * Entwickeln Sie hierzu bitte die folgenden Methoden:
+ * Es gibt vielfältige Leetspeak-Ersetzungen, z.B.:
  *
- * - `isPrim()` prüft, ob eine gegebene Zahl eine Primzahl ist.
- * - `primsUntil()` erzeugt eine Liste aller aufsteigen sortierten Primzahlen
- *   bis zu einer oberen Schranke.
- * - `columnize()` erzeugt aus einer Liste eine Zeichenkette in dem jedes Element
- *   mit einem Tabulator `\t` getrennt wird. Jeder n.te Tabulator wird jedoch
- *   durch ein `\n` ersetzt (solche Zeichenketten erscheinen tabellarisch
- *   auf der Konsole).
+ *      A=4    B=8    E=3    G=6
+ *      L=1    O=0    P=9    S=5
+ *      T=7    Z=2
  *
- * Aufrufbeispiele finden Sie in der `main()`-Methode.
+ * A=4 bedeutet bspw., dass alle Vorkommen von 'a' oder 'A'
+ * durch die Ziffer 4 in einer Zeichenkette zu ersetzen wären,
+ * den 4 sieht ähnlich aus wie A.
+ *
+ * Mit der obigen Ersetzung würde "Hello World" zu "H3110 W0r1d".
+ *
+ * Entwickeln Sie nun bitte die folgenden Methoden für eine
+ * effiziente Leetspeech-Verarbeitung:
+ *
+ * - `replacings()` soll Leetspeech-Ersetzungen aus einer
+ *   Komma-separierten Zeichenkette erzeugen.
+ * - Mit der Methode `leetspech()` sollen Leetspeech Ersetzungen
+ *   dann auf Zeichenketten angewendet werden können.
+ *
+ * Aufrufbeispiele für beide Methoden finden Sie in der
+ * `main()`-Methode. Aus diesen können Sie die Wirkungsweise
+ * ableiten und generalisieren.
  *
  * __Hinweise:__
  *
- * - https://de.wikipedia.org/wiki/Primzahl
- * - Kennen Sie noch die String Methode `trim()`?
+ * - Die `split()`-Methode der Klasse `String` kann hilfreich sein.
  *
  */
 class Main {
-    public static boolean isPrim(int a ) {
-        int count = 2;
-        if (a <= 1) return false;
-        for (int i = 2; i < a; i++) {
-            if (a % i == 0) count++;
+    public static Map<Character, String> replacings(String words) {
+        Map<Character, String> mapping = new HashMap<>();
+        String[] array = words.trim().split(",");
+        for (int i = 0; i < array.length; i++) {
+            String[] split = array[i].split("=");
+            mapping.put(Character.toUpperCase(split[0].charAt(0)), split[1]);
+            mapping.put(Character.toLowerCase(split[0].charAt(0)), split[1]);
         }
-        if (count > 2) return false;
-        return true;
-    }
-    public static List<Integer> primsUntil(int a ) {
-        List<Integer> prims = new ArrayList<>();
-        Set<Integer> sets = new TreeSet<>();
-        for (int i = 0; i < a; i++) {
-            if(isPrim(i))
-                sets.add(i);
-        }
-        prims.addAll(sets);
-        return prims;
+
+        return mapping;
     }
 
-    public static String columnize(List<Integer> prims, int a) {
-        String ordered = "";
+    // Bitte geben Sie hier die replacings() Methode an:
 
-        for (int i = 0; i < prims.size(); i++) {
-            if( (i + 1) % a != 0) {
-                ordered += prims.get(i) + "\t";
+    public static String leetspeech(String words, Map<Character, String> mapping) {
+        String translated = "";
+        char[] chars = words.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if(mapping.containsKey(chars[i])) {
+                translated += mapping.get(chars[i]);
             } else {
-                ordered += prims.get(i) +"\n";
+                translated += chars[i];
             }
         }
 
-        return ordered;
+        return translated;
     }
+    // Bitte geben Sie hier die leetspeech() Methode an:
+
+
     public static void main(String[] args) {
-        boolean prim = isPrim(7);
-        System.out.println(prim); // => true
 
-        List<Integer> prims = primsUntil(20);
-        System.out.println(prims); // => [2, 3, 5, 7, 11, 13, 17, 19]
+        // Mit der Methode replacings() sollen Leetspeech-
+        // Ersetzungen aus Komma-separierten Zeichenketten
+        // erzeugt werden können.
+        Map<Character, String> mappings = replacings(
+                "A=4,B=8,E=3,G=6,L=1,O=0,S=5,T=7,Z=2,"
+        );
+        System.out.println(mappings);
+        /* Dies erzeugt folgende Mappingausgabe auf der Konsole
+           (ohne Zeilenumbruch):
+        {A=4, B=8, E=3, G=6, L=1, O=0, S=5, T=7, Z=2,
+         a=4, b=8, e=3, g=6, l=1, o=0, s=5, t=7, z=2}
+        */
 
-        String output = columnize(prims, 3);
-        System.out.println(output);
-        // 2   3   5
-        // 7   11  13
-        // 17  19
-
-        // Entspricht der Zeichenkette: "2\t3\t5\n7\t11\t13\n17\t19"
+        // Die Methode leetspeech() soll diese Ersetzungen
+        // dann auf Zeichenketten anwenden.
+        String leet = leetspeech("Elite speech", mappings);
+        System.out.println(leet);
+        // => 31i73 5p33ch
+        System.out.println(leetspeech("Berlin", replacings("B=8,l=1")));
+        // => 8er1in
+        System.out.println(leetspeech("Wow", replacings("w=VV,O=0")));
+        // => VV0VV
     }
 }
