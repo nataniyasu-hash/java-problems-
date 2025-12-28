@@ -1,100 +1,63 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
- * ## [Leetspeech](https://de.wikipedia.org/wiki/Leetspeak)
+ * ## Liste von Blöcken aus Zeichenketten extrahieren
  *
- * Leetspeak (oder 1337) bezeichnet im Netzjargon das Ersetzen
- * von Buchstaben durch ähnlich aussehende Ziffern sowie
- * Sonderzeichen. Die häufige Schreibweise 1337 für Leetspeak
- * entstand aus dem englischen Wort "Elite". Es wurde dabei erst
- * zu Eleet verballhornt und dann zu 'leet abgekürzt, was im
- * Leetspeak als 1337 geschrieben wird.
+ * Unter einem Block verstehen wir eine Folge gleicher Zeichen, z.B. “aaaa”.
+ * Blöcke mit mehr als einem Zeichen, können kompakt dargestellt werden,
+ * indem nur das Zeichen und die Wiederholung angegeben wird
+ * (die Kompaktschreibweise für “aaaa” wäre “a4”).
+ * Blöcke der Länge 1 werden nicht in Kompaktschreibweise notiert
+ * (“a” wird also nie zu “a1”).
  *
- * Es gibt vielfältige Leetspeak-Ersetzungen, z.B.:
+ * Entwickeln Sie nun bitte eine Methode `compacts()`,
+ * die aus einer beliebigen Zeichenkette eine Liste von Blöcken in
+ * Kompaktschreibweise erzeugt.
  *
- *      A=4    B=8    E=3    G=6
- *      L=1    O=0    P=9    S=5
- *      T=7    Z=2
- *
- * A=4 bedeutet bspw., dass alle Vorkommen von 'a' oder 'A'
- * durch die Ziffer 4 in einer Zeichenkette zu ersetzen wären,
- * den 4 sieht ähnlich aus wie A.
- *
- * Mit der obigen Ersetzung würde "Hello World" zu "H3110 W0r1d".
- *
- * Entwickeln Sie nun bitte die folgenden Methoden für eine
- * effiziente Leetspeech-Verarbeitung:
- *
- * - `replacings()` soll Leetspeech-Ersetzungen aus einer
- *   Komma-separierten Zeichenkette erzeugen.
- * - Mit der Methode `leetspech()` sollen Leetspeech Ersetzungen
- *   dann auf Zeichenketten angewendet werden können.
- *
- * Aufrufbeispiele für beide Methoden finden Sie in der
- * `main()`-Methode. Aus diesen können Sie die Wirkungsweise
- * ableiten und generalisieren.
- *
- * __Hinweise:__
- *
- * - Die `split()`-Methode der Klasse `String` kann hilfreich sein.
+ * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
  */
 class Main {
-    public static Map<Character, String> replacings(String words) {
-        Map<Character, String> mapping = new HashMap<>();
-        String[] array = words.trim().split(",");
-        for (int i = 0; i < array.length; i++) {
-            String[] split = array[i].split("=");
-            mapping.put(Character.toUpperCase(split[0].charAt(0)), split[1]);
-            mapping.put(Character.toLowerCase(split[0].charAt(0)), split[1]);
-        }
+    public static List<String> compacts(String word) {
+        List<String> list = new ArrayList<>();
+        if (word.length() == 0) return list;
 
-        return mapping;
-    }
+        char[] chars = word.toCharArray();
+        char temp = chars[0];
+        int count = 1;
 
-    // Bitte geben Sie hier die replacings() Methode an:
 
-    public static String leetspeech(String words, Map<Character, String> mapping) {
-        String translated = "";
-        char[] chars = words.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            if(mapping.containsKey(chars[i])) {
-                translated += mapping.get(chars[i]);
+        for (int i = 1; i < chars.length; i++) {
+            if(temp == chars[i]) {
+                count++;
+                temp = chars[i];
             } else {
-                translated += chars[i];
+                if (count > 1) {
+                    list.add(String.valueOf(temp) + count);
+                }
+                    if (count == 1){
+                list.add(String.valueOf(temp));
+
+                }
+                count = 1;
+                temp = chars[i];
+
             }
         }
-
-        return translated;
+        if (count > 1) {
+            list.add(String.valueOf(temp) + count);
+        } else {
+            list.add(String.valueOf(temp));
+        }
+        return list;
     }
-    // Bitte geben Sie hier die leetspeech() Methode an:
-
-
     public static void main(String[] args) {
-
-        // Mit der Methode replacings() sollen Leetspeech-
-        // Ersetzungen aus Komma-separierten Zeichenketten
-        // erzeugt werden können.
-        Map<Character, String> mappings = replacings(
-                "A=4,B=8,E=3,G=6,L=1,O=0,S=5,T=7,Z=2,"
-        );
-        System.out.println(mappings);
-        /* Dies erzeugt folgende Mappingausgabe auf der Konsole
-           (ohne Zeilenumbruch):
-        {A=4, B=8, E=3, G=6, L=1, O=0, S=5, T=7, Z=2,
-         a=4, b=8, e=3, g=6, l=1, o=0, s=5, t=7, z=2}
-        */
-
-        // Die Methode leetspeech() soll diese Ersetzungen
-        // dann auf Zeichenketten anwenden.
-        String leet = leetspeech("Elite speech", mappings);
-        System.out.println(leet);
-        // => 31i73 5p33ch
-        System.out.println(leetspeech("Berlin", replacings("B=8,l=1")));
-        // => 8er1in
-        System.out.println(leetspeech("Wow", replacings("w=VV,O=0")));
-        // => VV0VV
+        List<String> blocks = compacts("Hello");
+        System.out.println(blocks); // => ["H", "e", "l2", "o"]
+        System.out.println(compacts("Oooorder")); // => ["O", "o3", "r", "d", "e", "r"]
+        System.out.println(compacts("C3PO")); // => ["C", "3", "P", "O"]
+        System.out.println(compacts("...")); // => [".3"]
+        System.out.println(compacts("")); // => []
     }
 }
