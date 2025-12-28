@@ -1,63 +1,73 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- * ## Liste von Blöcken aus Zeichenketten extrahieren
+ * ## Würfeln
  *
- * Unter einem Block verstehen wir eine Folge gleicher Zeichen, z.B. “aaaa”.
- * Blöcke mit mehr als einem Zeichen, können kompakt dargestellt werden,
- * indem nur das Zeichen und die Wiederholung angegeben wird
- * (die Kompaktschreibweise für “aaaa” wäre “a4”).
- * Blöcke der Länge 1 werden nicht in Kompaktschreibweise notiert
- * (“a” wird also nie zu “a1”).
+ * Entwickeln Sie nun bitte eine Klasse `Dice`,
+ * die einen Würfel und dessen zufälliges Würfelverhalten
+ * abbilden soll. Ein Würfel kann 6 Zustände einnehmen:
+ * W1, W2, W3, W4, W5 und W6 (diese Zustände sollen als
+ * Strings ausgedrückt werden).
  *
- * Entwickeln Sie nun bitte eine Methode `compacts()`,
- * die aus einer beliebigen Zeichenkette eine Liste von Blöcken in
- * Kompaktschreibweise erzeugt.
+ * Diese Zustände sind statistisch gleichverteilt.
  *
- * Aufrufbeispiele finden Sie in der `main()`-Methode.
+ * In der `main()`-Methode finden Sie Beispiele,
+ * wie Würfelobjekte zufällig und nicht zufällig
+ * angelegt und auf der Konsole ausgegeben werden können
+ * sollen.
+ *
+ * Um den Zufallsgenerator zu prüfen, sollen Sie zusätzlich
+ * auswerten, wie häufig für eine Liste von Würfelobjekten
+ * eine Zahl gewürfelt worden ist. Entwickeln Sie hierfür
+ * eine Methode `evaluate()`. In der `main()`-Methode finden
+ * Sie, wie `evaluate()` aufgerufen werden können soll.
+ *
+ * __Hinweise:__
+ *
+ * - Mittels `Math.random()` können Sie eine gleichverteilte
+ *   Zufallszahl im Bereich von [0.0, 1.0[ bestimmen.
  *
  */
 class Main {
-    public static List<String> compacts(String word) {
-        List<String> list = new ArrayList<>();
-        if (word.length() == 0) return list;
-
-        char[] chars = word.toCharArray();
-        char temp = chars[0];
-        int count = 1;
-
-
-        for (int i = 1; i < chars.length; i++) {
-            if(temp == chars[i]) {
-                count++;
-                temp = chars[i];
-            } else {
-                if (count > 1) {
-                    list.add(String.valueOf(temp) + count);
-                }
-                    if (count == 1){
-                list.add(String.valueOf(temp));
-
-                }
-                count = 1;
-                temp = chars[i];
-
-            }
+    public static Map<String, Integer> evaluate(List<Dice> list) {
+        Map<String, Integer> mapping = new LinkedHashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            mapping.put(list.get(i).toString(), mapping.getOrDefault(list.get(i).toString(), 0) + 1);
         }
-        if (count > 1) {
-            list.add(String.valueOf(temp) + count);
-        } else {
-            list.add(String.valueOf(temp));
-        }
-        return list;
+        return mapping;
     }
+
     public static void main(String[] args) {
-        List<String> blocks = compacts("Hello");
-        System.out.println(blocks); // => ["H", "e", "l2", "o"]
-        System.out.println(compacts("Oooorder")); // => ["O", "o3", "r", "d", "e", "r"]
-        System.out.println(compacts("C3PO")); // => ["C", "3", "P", "O"]
-        System.out.println(compacts("...")); // => [".3"]
-        System.out.println(compacts("")); // => []
+
+        // Konstruktor ohne Parameter: Zahl wird per Zufall bestimmt
+        Dice wuerfel = new Dice();
+        System.out.println(wuerfel); // => W4 (oder W1, W2, W3, W5, W6)
+
+        // Konstruktor mit einem Parameter: Zahl wird per Parameter gesetzt
+        wuerfel = new Dice(3);
+        System.out.println(wuerfel); // => W3
+
+        List<Dice> zufallswuerfe = Arrays.asList(
+                new Dice(), new Dice(), new Dice(),
+                new Dice(), new Dice(), new Dice()
+        );
+        System.out.println(zufallswuerfe);
+        // z.B. => [W4, W6, W4, W3, W2, W5]
+        // (oder andere zufällige Folge)
+
+        List<Dice> schummelwuerfe = Arrays.asList(
+                new Dice(1), new Dice(2), new Dice(3),
+                new Dice(4), new Dice(5), new Dice(6)
+        );
+        System.out.println(schummelwuerfe);
+        // [W1, W2, W3, W4, W5, W6]
+
+        // Zählen der Häufigkeit von Würfelzuständen
+        Map<String, Integer> auswertung = evaluate(zufallswuerfe);
+        System.out.println(auswertung);
+        // => z.B. {W2=1, W3=1, W4=2, W6=1}
+        // (oder andere zufällige Häufigkeit)
+        System.out.println(evaluate(schummelwuerfe));
+        // => {W1=1, W2=1, W3=1, W4=1, W5=1, W6=1}
     }
 }
