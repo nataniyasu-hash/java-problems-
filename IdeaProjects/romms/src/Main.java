@@ -1,37 +1,37 @@
 /**
- * ## Zeichenketten "rotieren"
+ * ## Vorkommen von Zeichenketten zählen
  *
- * Entwickeln Sie nun bitte eine Methode `rotate()`, die eine Zeichenkette
- * nach links oder rechts "rotiert". Zeichen die links oder rechts aus
- * der Zeichenkette "geschoben" werden, sollen rechts bzw. links wieder
- * "hineingeschoben" werden.
+ * Schreiben Sie nun eine Methode `countOccurences()` die zählt, wie häufig eine Zeichenkette *a* in einer
+ * anderen Zeichenkette *b* vorkommt. Sich überlagernde Zeichenketten sind erlaubt.
+ * D.h. "xx" ist als zweimal in "xxx" vorhanden zu zählen.
+ * Leere Zeichenketten sind nicht zu zählen.
  *
  * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
  * __Hinweise:__
  *
- * - Beachten Sie, dass eine Rotation positiv und negativ sein kann.
- * - Beachten Sie, dass eine Rotation länger als die eigentliche Zeichenkette sein kann.
- * - Das Problem lässt sich tatsächlich ohne Schleife lösen (sicherlich aber auch mit ;-).
+ * - In der Vorlesung wurde erläutert, was Methoden sind und wie sie funktionieren.
+ *   Mit diesem Wissen können Sie ab sofort die Methodenköpfe selber ableiten.
+ * - Beachten Sie, dass leere Zeichenketten schnell eine Endlosschleife erzeugen können.
+ * - Liefert VPL eine Out-of-Memory Fehlermeldung ist dies vermutlich auf eine
+ *   Endlosschleife zurückzuführen.
+ * - Die String-Methoden `indexOf()` oder `startsWith()` könnten hilfreich sein.
  *
  */
 class Main {
+    public static int countOccurences(String word, String text) {
+        int count = 0;
 
-    public static String rotate(int n, String s) {
-        String rotated = "";
-        int length = s.length();
-        n %= length; // große zahl auf vielfach reduzieren.
-        if (n < 0) n += length;
+        for (int i = 0; i < text.length(); i++) {
+            if(text.startsWith(word,i)) count++;
+        }
 
-        rotated = s.substring(length - n) + s.substring(0, n);
-
-        return rotated;
+        return count;
     }
 
     public static void main(String[] args) {
-        String result = rotate(2, "Hello");
-        System.out.println(result); // => "loHel"
-        System.out.println(rotate(3, "Hello")); // => "lloHe"
-        System.out.println(rotate(6, "Hello")); // => "oHell"
+        System.out.println(countOccurences("Hello", "Hello World")); // => 1
+        System.out.println(countOccurences("abc", "abc abc abc")); // => 3
+        System.out.println(countOccurences("xx", "xxx")); // => 2
     }
 }
