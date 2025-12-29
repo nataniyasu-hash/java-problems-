@@ -1,42 +1,37 @@
 /**
- * ## Bestimme die Länge des längsten Blocks
+ * ## Zeichenketten "rotieren"
  *
- * Unter einem Block verstehen wir mehrere aufeinander folgende gleiche Zeichen
- * in einer Zeichenkette (z.B. "aaa" in "xaaax" oder "bb" in "abbcde").
- *
- * Entwickeln Sie bitte eine Methode `maxBlockLength()`, die in einer
- * beliebigen Zeichenkette, die Länge des längsten Blocks bestimmt.
+ * Entwickeln Sie nun bitte eine Methode `rotate()`, die eine Zeichenkette
+ * nach links oder rechts "rotiert". Zeichen die links oder rechts aus
+ * der Zeichenkette "geschoben" werden, sollen rechts bzw. links wieder
+ * "hineingeschoben" werden.
  *
  * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
+ * __Hinweise:__
+ *
+ * - Beachten Sie, dass eine Rotation positiv und negativ sein kann.
+ * - Beachten Sie, dass eine Rotation länger als die eigentliche Zeichenkette sein kann.
+ * - Das Problem lässt sich tatsächlich ohne Schleife lösen (sicherlich aber auch mit ;-).
+ *
  */
-public class Main {
+class Main {
 
-    public static int maxBlockLength(String text) {
-        int count = 1;
-        int max = 1;
-        char temp = text.charAt(0);
-        for (int i = 1; i < text.length(); i++) {
-            if (temp == text.charAt(i)) {
-                count++;
-                temp = text.charAt(i);
-            } else {
-                if (count > max) {
-                    max = count;
-                }
-                temp = text.charAt(i);
-                count = 1;
-            }
-        }
+    public static String rotate(int n, String s) {
+        String rotated = "";
+        int length = s.length();
+        n %= length; // große zahl auf vielfach reduzieren.
+        if (n < 0) n += length;
 
-        return max;
-        // Stimmt vermutlich selten!
+        rotated = s.substring(length - n) + s.substring(0, n);
+
+        return rotated;
     }
 
     public static void main(String[] args) {
-        int block = maxBlockLength("abcXXXabc");
-        System.out.println(block); // => 3
-        System.out.println(maxBlockLength("xxxabyyyycd")); // => 4        
-        System.out.println(maxBlockLength("abc")); // => 1
+        String result = rotate(2, "Hello");
+        System.out.println(result); // => "loHel"
+        System.out.println(rotate(3, "Hello")); // => "lloHe"
+        System.out.println(rotate(6, "Hello")); // => "oHell"
     }
 }
