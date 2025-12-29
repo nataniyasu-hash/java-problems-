@@ -1,73 +1,42 @@
-import java.util.*;
-
 /**
- * ## Würfeln
+ * ## Bestimme die Länge des längsten Blocks
  *
- * Entwickeln Sie nun bitte eine Klasse `Dice`,
- * die einen Würfel und dessen zufälliges Würfelverhalten
- * abbilden soll. Ein Würfel kann 6 Zustände einnehmen:
- * W1, W2, W3, W4, W5 und W6 (diese Zustände sollen als
- * Strings ausgedrückt werden).
+ * Unter einem Block verstehen wir mehrere aufeinander folgende gleiche Zeichen
+ * in einer Zeichenkette (z.B. "aaa" in "xaaax" oder "bb" in "abbcde").
  *
- * Diese Zustände sind statistisch gleichverteilt.
+ * Entwickeln Sie bitte eine Methode `maxBlockLength()`, die in einer
+ * beliebigen Zeichenkette, die Länge des längsten Blocks bestimmt.
  *
- * In der `main()`-Methode finden Sie Beispiele,
- * wie Würfelobjekte zufällig und nicht zufällig
- * angelegt und auf der Konsole ausgegeben werden können
- * sollen.
- *
- * Um den Zufallsgenerator zu prüfen, sollen Sie zusätzlich
- * auswerten, wie häufig für eine Liste von Würfelobjekten
- * eine Zahl gewürfelt worden ist. Entwickeln Sie hierfür
- * eine Methode `evaluate()`. In der `main()`-Methode finden
- * Sie, wie `evaluate()` aufgerufen werden können soll.
- *
- * __Hinweise:__
- *
- * - Mittels `Math.random()` können Sie eine gleichverteilte
- *   Zufallszahl im Bereich von [0.0, 1.0[ bestimmen.
+ * Aufrufbeispiele finden Sie in der `main()`-Methode.
  *
  */
-class Main {
-    public static Map<String, Integer> evaluate(List<Dice> list) {
-        Map<String, Integer> mapping = new LinkedHashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            mapping.put(list.get(i).toString(), mapping.getOrDefault(list.get(i).toString(), 0) + 1);
+public class Main {
+
+    public static int maxBlockLength(String text) {
+        int count = 1;
+        int max = 1;
+        char temp = text.charAt(0);
+        for (int i = 1; i < text.length(); i++) {
+            if (temp == text.charAt(i)) {
+                count++;
+                temp = text.charAt(i);
+            } else {
+                if (count > max) {
+                    max = count;
+                }
+                temp = text.charAt(i);
+                count = 1;
+            }
         }
-        return mapping;
+
+        return max;
+        // Stimmt vermutlich selten!
     }
 
     public static void main(String[] args) {
-
-        // Konstruktor ohne Parameter: Zahl wird per Zufall bestimmt
-        Dice wuerfel = new Dice();
-        System.out.println(wuerfel); // => W4 (oder W1, W2, W3, W5, W6)
-
-        // Konstruktor mit einem Parameter: Zahl wird per Parameter gesetzt
-        wuerfel = new Dice(3);
-        System.out.println(wuerfel); // => W3
-
-        List<Dice> zufallswuerfe = Arrays.asList(
-                new Dice(), new Dice(), new Dice(),
-                new Dice(), new Dice(), new Dice()
-        );
-        System.out.println(zufallswuerfe);
-        // z.B. => [W4, W6, W4, W3, W2, W5]
-        // (oder andere zufällige Folge)
-
-        List<Dice> schummelwuerfe = Arrays.asList(
-                new Dice(1), new Dice(2), new Dice(3),
-                new Dice(4), new Dice(5), new Dice(6)
-        );
-        System.out.println(schummelwuerfe);
-        // [W1, W2, W3, W4, W5, W6]
-
-        // Zählen der Häufigkeit von Würfelzuständen
-        Map<String, Integer> auswertung = evaluate(zufallswuerfe);
-        System.out.println(auswertung);
-        // => z.B. {W2=1, W3=1, W4=2, W6=1}
-        // (oder andere zufällige Häufigkeit)
-        System.out.println(evaluate(schummelwuerfe));
-        // => {W1=1, W2=1, W3=1, W4=1, W5=1, W6=1}
+        int block = maxBlockLength("abcXXXabc");
+        System.out.println(block); // => 3
+        System.out.println(maxBlockLength("xxxabyyyycd")); // => 4        
+        System.out.println(maxBlockLength("abc")); // => 1
     }
 }
