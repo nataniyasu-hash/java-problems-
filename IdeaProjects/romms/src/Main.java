@@ -1,37 +1,58 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
 /**
- * ## Vorkommen von Zeichenketten zählen
  *
- * Schreiben Sie nun eine Methode `countOccurences()` die zählt, wie häufig eine Zeichenkette *a* in einer
- * anderen Zeichenkette *b* vorkommt. Sich überlagernde Zeichenketten sind erlaubt.
- * D.h. "xx" ist als zweimal in "xxx" vorhanden zu zählen.
- * Leere Zeichenketten sind nicht zu zählen.
+ * ## `zeroMax()`
  *
- * Aufrufbeispiele finden Sie in der `main()`-Methode.
+ * Entwickeln Sie nun bitte eine Methode `zeroMax()`, die ein Integer Array aus
+ * einer übergebenen Liste von Integer Werten erzeugt, bei der jeder Nullwert
+ * (0, also nicht null!!!)
+ * in der Liste durch den größten positiven Wert rechts von der Null ersetzt wird.
+ * Wenn es rechts von der Null keinen größten positiven Wert gibt, wird die Null
+ * als Null belassen.
  *
- * __Hinweise:__
+ * Aufruf-Beispiele finden Sie in der `main()`-Methode.
  *
- * - In der Vorlesung wurde erläutert, was Methoden sind und wie sie funktionieren.
- *   Mit diesem Wissen können Sie ab sofort die Methodenköpfe selber ableiten.
- * - Beachten Sie, dass leere Zeichenketten schnell eine Endlosschleife erzeugen können.
- * - Liefert VPL eine Out-of-Memory Fehlermeldung ist dies vermutlich auf eine
- *   Endlosschleife zurückzuführen.
- * - Die String-Methoden `indexOf()` oder `startsWith()` könnten hilfreich sein.
+ * Hinweis: Wenn Ihnen der Datentyp List (noch) nichts sagt, fragen Sie KIRA
+ * was das für ein Datentyp ist und wie man mit diesem umgeht.
  *
  */
-class Main {
-    public static int countOccurences(String word, String text) {
-        int count = 0;
+public class Main {
+    public static int[] zeroMax(List<Integer> list) {
+        int[] zeroMax = new int[list.size()];
+        for (int i = 0; i <list.size(); i++) {
+            if(list.get(i) != 0) {
+                zeroMax[i] = list.get(i);
+            }
+            if (list.get(i) == 0) {
+                int max = 0;
+                int temp= 0;
 
-        for (int i = 0; i < text.length(); i++) {
-            if(text.startsWith(word,i)) count++;
+                for (int j = i + 1; j < list.size(); j++) {
+                    if (list.get(j) != 0) {
+                         temp = list.get(j);
+                    }
+                    if (temp > max ) {
+                        max = temp;
+                    }
+                }
+                zeroMax[i] = max;
+            }
         }
-
-        return count;
+        return zeroMax;
     }
 
     public static void main(String[] args) {
-        System.out.println(countOccurences("Hello", "Hello World")); // => 1
-        System.out.println(countOccurences("abc", "abc abc abc")); // => 3
-        System.out.println(countOccurences("xx", "xxx")); // => 2
+        List<Integer> list = Arrays.asList(0, 5, 0, 3);
+        int[] result = zeroMax(list);
+        System.out.println(Arrays.toString(result));        // => [5, 5, 3, 3]
+
+        list = Arrays.asList(0, 4, 0, 3);
+        System.out.println(Arrays.toString(zeroMax(list))); // => [4, 4, 3, 3]
+
+        list = Arrays.asList(0, 1, 0);
+        System.out.println(Arrays.toString(zeroMax(list)));  // => [1, 1, 0]
     }
 }
