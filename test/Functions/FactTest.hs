@@ -11,6 +11,16 @@ expected_facts = 1:(zipWith (*) expected_facts [1..])
 actual_facts   = map fact [0..]                                             
 prop_fact_clever = and $ take 7 $ zipWith (==) expected_facts actual_facts
 
+prop_example_fact1 ::  Bool
+prop_example_fact1 = fact 1 == 1
+
+prop_data_fact :: Property
+prop_data_fact = forAll (choose (0 , 10)) $ \n ->
+    fact n >= 1
+
+
+
+
 return []
 runTests = $quickCheckAll
 

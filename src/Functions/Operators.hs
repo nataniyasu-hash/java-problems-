@@ -11,5 +11,28 @@ addRec x y = addRec (x+1) (y-1)
 succ :: Int -> Int
 succ x = x + 1
 
+
 max :: Int -> Int -> Int
-max a b = 0
+max a b = if a > b then a else b
+
+not :: Bool -> Bool
+not True = False
+not False = True
+
+
+und :: Bool -> Bool -> Bool
+und a b = a && b
+
+oder :: Bool -> Bool -> Bool
+oder a b = a || b
+
+nand :: Bool -> Bool -> Bool
+nand a b = not (a && b)
+
+nor :: Bool -> Bool -> Bool
+nor a b = not (a || b)
+
+odd :: Integer -> Bool
+odd a = if a `mod` 2 /= 0 then True else False
+
+
