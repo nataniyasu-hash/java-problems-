@@ -7,45 +7,102 @@ import Prelude hiding (sum,all,reverse,
                        or,init,minimum,
                        any,last,maximum)
 
-length = undefined
+length :: [a] -> Int
+length [] = 0
+length (x:xs) = 1 + length xs
 
-sum = undefined
+sum :: [Int] -> Int
+sum [] = 0
+sum (x:xs) = x + sum xs
 
-prod = undefined
+prod :: [Int] -> Int
+prod [] = 1
+prod (x:xs) = x * prod xs
 
-last = undefined
 
-init = undefined
+last :: [a] -> a
+last [x] = x
+last (_:xs) = last xs
 
-elem = undefined
+init :: [a] -> [a]
+init [_] = []
+init [x:xs] = x : init xs
 
-and = undefined
-or = undefined
+elem :: Eq a => a -> [a] -> a
+elem _[] = False
+elem z (x:xs) = (z == x) || elem z xs
 
-any = undefined
+and :: [Bool] -> Bool
+and [] = True
+and (x:xs) = x && and xs
 
-all = undefined
+or :: [Bool] -> Bool
+or [] = False
+or (x:xs) = x || or xs
 
-maximum = undefined
+any :: (a -> Bool) -> [a] -> Bool
+any _[] = False
+any p (x:xs) = p x || any p xs
 
-minimum = undefined
+all :: (a -> Bool) -> [a] -> Bool
+all _[] = True
+all p (x:xs) = p x || all p xs
 
-append = undefined
+maximum :: Ord a => [a] -> a
+maximum [x] = x
+maximum (x:xs) = max x (maximum xs)
 
-concat = undefined
+minimum :: Ord a => [a] -> a
+minumum [x] = x
+minimum (x:xs) = min x (minimum xs)
 
-take = undefined
+append :: [a] -> [a] -> [a]
+append [] ys = ys
+append (x:xs) ys = x : append xs ys
 
-drop = undefined
+concat :: [[a]] -> [a]
+concat [] = []
+concat (xs:xss) = xs ++ concat xss
 
-takeWhile = undefined
+take :: Int -> [a] -> [a]
+take _ [] = []
+take 0 [] = []
+take n (x:xs) = x : take (n - 1) xs
 
-dropWhile = undefined
+drop :: Int -> [a] -> [a]
+drop _ [] = []
+drop 0 xs = xs
+drop n (x:xs) = drop (n - 1) xs
+
+takeWhile :: (a -> Bool) -> [a] -> [a]
+takeWhile _[] = []
+takeWhile p (x:xs)
+    | p x = x : takeWhile p xs
+    | otherwise = []
+
+dropWhile :: (a -> Bool) -> [a] -> [a]
+dropWhile _[] = []
+dropWhile p (x:xs)
+    | p x = x : dropWhile p xs
+    | otherwise = x : xs
      
-map = undefined
+map :: (a -> b) -> [a] -> [b]
+map f [] = []
+map f (x:xs) = f x : map f xs
 
-filter = undefined
-  
-reverse = undefined
+filter :: (a -> Bool) -> [a] -> [a]
+filter p [] = []
+filter p (x:xs)
+    | p x = x : filter xs
+    | otherwise = filter xs
 
-partition = undefined
+reverse :: [a] -> [a]
+reverse [] = []
+reverse (x:xs) = reverse xs ++ [x]
+
+partition :: (a -> Bool) -> [a] -> ([a], [a])
+partition _ [] = ([], [])
+partition p (x:xs)
+    | p x = ((x:accepted), rejected)
+    | otherwise = (accepted, (x:rejected))
+        where (accepted, rejected) = partition p xs
