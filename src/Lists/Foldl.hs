@@ -5,24 +5,19 @@ import Prelude hiding (sum,and,last,
                        length,any,reverse,
                        elem,all)
 
-sum = undefined
+sum :: Num a => [a] -> a
+sum = foldl (+) 0
 
-prod = undefined
+prod :: Num a => [a] -> a
+prod = foldl (*) 1
 
-length = undefined
+and :: [Bool] -> Bool
+and = foldl (&&) True
 
-elem = undefined
+or :: [Bool] -> Bool
+or = foldl (||) False
 
-and = undefined
-or  = undefined
 
-any = undefined
-all = undefined
 
-last = undefined
-
-concat = undefined
-
-reverse = undefined
 
 -- euler5 = undefined
