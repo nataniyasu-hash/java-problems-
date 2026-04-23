@@ -6,6 +6,7 @@ import Prelude hiding (sum,all,reverse,
                        and,filter,dropWhile,
                        or,init,minimum,
                        any,last,maximum)
+import Numeric.Natural
 
 length :: [a] -> Int
 length [] = 0
@@ -26,10 +27,10 @@ last (_:xs) = last xs
 
 init :: [a] -> [a]
 init [_] = []
-init [x:xs] = x : init xs
+init (x:xs) = x : init xs
 
-elem :: Eq a => a -> [a] -> a
-elem _[] = False
+elem :: Eq a => a -> [a] -> Bool
+elem _ [] = False
 elem z (x:xs) = (z == x) || elem z xs
 
 and :: [Bool] -> Bool
@@ -53,7 +54,7 @@ maximum [x] = x
 maximum (x:xs) = max x (maximum xs)
 
 minimum :: Ord a => [a] -> a
-minumum [x] = x
+minimum [x] = x
 minimum (x:xs) = min x (minimum xs)
 
 append :: [a] -> [a] -> [a]
@@ -64,9 +65,9 @@ concat :: [[a]] -> [a]
 concat [] = []
 concat (xs:xss) = xs ++ concat xss
 
-take :: Int -> [a] -> [a]
-take _ [] = []
+take :: Natural -> [a] -> [a]
 take 0 [] = []
+take _ [] = []
 take n (x:xs) = x : take (n - 1) xs
 
 drop :: Int -> [a] -> [a]
@@ -93,8 +94,8 @@ map f (x:xs) = f x : map f xs
 filter :: (a -> Bool) -> [a] -> [a]
 filter p [] = []
 filter p (x:xs)
-    | p x = x : filter xs
-    | otherwise = filter xs
+    | p x = x : filter p xs
+    | otherwise = filter p xs
 
 reverse :: [a] -> [a]
 reverse [] = []
