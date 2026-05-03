@@ -71,6 +71,9 @@ public abstract class List<A> {
     public <B> B foldl(Function<B, Function<A, B>> f, B s) {
       return s;
     }
+    public String toString() {
+      return "[]";
+    }
   }
 
   private static class Cons<A> extends List<A> {
@@ -111,6 +114,15 @@ public abstract class List<A> {
 
     public <B> B foldl(Function<B, Function<A, B>> f, B s) {
       return this.tail.foldl(f, f.apply(s).apply(this.head));
+    }
+
+    public String toString() {
+      // start wert frü foldl
+      StringBuilder s = new StringBuilder("[");
+
+      StringBuilder result = this.foldl(acc -> x -> acc.append(x).append(", "), s);
+      result.setLength(result.length() - 2);
+      return result.append("]").toString();
     }
   }
 
