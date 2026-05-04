@@ -26,6 +26,62 @@ public abstract class List<A> {
     return xs.foldl(f, s);
   }
 
+  public static Integer sum(List<Integer> list) {
+    return list.foldl(acc -> x -> x + acc, 0);
+  }
+
+  public static Double prod(List<Double> list) {
+    return list.foldl(acc-> x-> acc * x, 1.0);
+  }
+
+  public static boolean and(List<Boolean> list) {
+    return list.foldl(acc -> x -> acc && x, true);
+  }
+
+  public static boolean or(List<Boolean> list) {
+
+    return list.foldl(acc -> x -> acc || x, false);
+  }
+
+  public static Integer minimum(List<Integer> list) {
+    if (list.isEmpty()) {
+      throw new IllegalStateException("minimum auf eine leere Liste aufgerufen");
+    }
+    return list.tail().foldl(acc -> x -> acc > x ? x : acc, list.head());
+  }
+
+  public static Integer maximum(List<Integer> list) {
+    if (list.isEmpty()) {
+      throw new IllegalStateException("maximum auf eine Leere Liste aufgerufen");
+    }
+    return list.tail().foldl(acc -> x -> acc > x ? acc : x, list.head());
+  }
+
+  public <B> List<B> map(Function<A, B> f) {
+    return this.foldr(x -> acc -> new Cons<>(f.apply(x), acc), (List<B>) new Nil<>());
+  }
+
+  public List<A> filter(Function<A, Boolean> f) {
+    return this.foldr(x -> acc -> f.apply(x) ?  new Cons<>(x, acc) : acc, (List<A>) new Nil<>());
+  }
+
+  public static <A> List<A> append(List<A> list1, List<A> list2) {
+    return list1.foldr(x -> acc -> new Cons<>(x, acc), list2);
+  }
+
+  public static <A> List<A> concat(List<List<A>> list) {
+    return list.foldr(x -> acc -> append(x, acc), (List<A>) new Nil<>())
+  }
+
+  public int lenght() {
+    return this.foldl(acc -> x -> 1 + acc, 0);
+  }
+
+  public List<A> reverse() {
+    return this.foldl(acc -> x -> new Cons<>(x, acc), (List<A>) new Nil<>());
+  }
+
+
   public List<A> cons(A a) {
     return new Cons<>(a, this);
   }
