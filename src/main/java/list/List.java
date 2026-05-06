@@ -12,7 +12,6 @@ public abstract class List<A> {
 
   public abstract List<A> setHead(A h);
 
-  public abstract boolean isEqualTo(List<A> xs);
 
   public abstract <B> B foldr(Function<A, Function<B, B>> f, B s);
 
@@ -70,15 +69,54 @@ public abstract class List<A> {
   }
 
   public static <A> List<A> concat(List<List<A>> list) {
-    return list.foldr(x -> acc -> append(x, acc), (List<A>) new Nil<>())
+    return list.foldr(x -> acc -> append(x, acc), (List<A>) new Nil<>());
   }
 
-  public int lenght() {
+  public abstract List<A> take(int n);
+  public abstract List<A> drop(int n);
+  public abstract A finde(Function<A, Boolean> p);
+  public abstract List<A> delete(A d);
+  public abstract List<A> takeWhile(Function<A, Boolean> p);
+  public abstract List<A> dropWhile(Function<A, Boolean> p);
+  public abstract A last();
+  public abstract List<A> init();
+  public abstract boolean any(Function<A, Boolean> p);
+  public abstract boolean isEqualTo(List<A> xs);
+
+
+  public boolean elem(A x) {
+    return this.any(y -> y.equals(x));
+  }
+
+  public boolean all(Function<A, Boolean > p) {
+    return !this.any(x -> !p.apply(x));
+  }
+
+  public int length() {
     return this.foldl(acc -> x -> 1 + acc, 0);
   }
 
   public List<A> reverse() {
     return this.foldl(acc -> x -> new Cons<>(x, acc), (List<A>) new Nil<>());
+  }
+
+  public <B> List<B> concatMap(Function<A, List<B>> f) {
+    return concat(map(f));
+  }
+
+  public static List<Integer> range(int start, int end) {
+    return start > end ? new Nil<>() : new Cons<>(start, range(start + 1, end));
+  }
+
+  public static List<String> words(String a) {
+    return a == null || a.trim().isEmpty() ? new Nil<>() : list(a.trim().split("\\s+"));
+  }
+
+  public boolean equals(Object o) {
+    return this == o ? true
+            : !(o instanceof List) ? true
+            : this.isEqualTo((List<A>) o);
+
   }
 
 
@@ -117,7 +155,7 @@ public abstract class List<A> {
 
     @Override
     public boolean isEqualTo(List<A> xs){
-      return false;
+      return xs.isEmpty();
     }
 
     public <B> B foldr(Function<A, Function<B, B>> f, B s) {
@@ -127,6 +165,44 @@ public abstract class List<A> {
     public <B> B foldl(Function<B, Function<A, B>> f, B s) {
       return s;
     }
+
+    public List<A> take(int n) {
+      return this;
+    }
+
+    public List<A> drop(int n) {
+      return this;
+    }
+
+    public A finde(Function<A, Boolean> p) {
+      return null;
+    }
+
+    public List<A> delete(A d) {
+      return this;
+    }
+
+    public List<A> takeWhile(Function<A, Boolean> p) {
+      return this;
+    }
+
+    public List<A> dropWhile(Function<A, Boolean> p) {
+      return this;
+    }
+
+    public A last() {
+       throw new IllegalStateException("last auf leere List aufgerufen");
+    }
+
+    public List<A> init() {
+      throw new IllegalStateException("init() auf eine Leere liste aufgerufen");
+    }
+
+    public boolean any(Function<A, Boolean> p) {
+      return false;
+    }
+
+
     public String toString() {
       return "[]";
     }
@@ -161,7 +237,8 @@ public abstract class List<A> {
 
     @Override
     public boolean isEqualTo(List<A> xs){
-      return false;
+      return xs.isEmpty() ? false
+              : this.head().equals(xs.head()) && this.tail.isEqualTo(xs.tail());
     }
 
     public <B> B foldr(Function<A, Function<B, B>> f, B s) {
@@ -171,6 +248,47 @@ public abstract class List<A> {
     public <B> B foldl(Function<B, Function<A, B>> f, B s) {
       return this.tail.foldl(f, f.apply(s).apply(this.head));
     }
+
+    public List<A> take(int n) {
+      if (n <= 0)
+          return new Nil<>();
+      return new Cons<>(this.head(), this.tail().take(n - 1));
+    }
+
+    public List<A> drop(int n) {
+      if (n <= 0)
+        return this;
+      return this.tail.drop(n - 1);
+    }
+
+    public A finde(Function<A, Boolean> p) {
+      return  p.apply(this.head()) ? (A) this.head() : this.tail().finde(p);
+    }
+    public List<A> delete(A d) {
+      return this.head().equals(d) ? this.tail() : new Cons<>(this.head(), this.tail().delete(d));
+    }
+
+    public List<A> takeWhile(Function<A, Boolean> p) {
+      return p.apply(this.head()) ? new Cons<>(this.head(), this.tail().takeWhile(p)) : new Nil<>();
+    }
+
+    public List<A> dropWhile(Function<A, Boolean> p) {
+      return p.apply(this.head()) ? this.tail().dropWhile(p) : this;
+    }
+
+    public A last() {
+      return this.tail().isEmpty() ? this.head() : this.tail().last();
+    }
+
+    public List<A> init() {
+      return this.tail().isEmpty() ? new Nil<>() : new Cons<>(this.head(), this.tail().init());
+    }
+
+    public boolean any(Function<A, Boolean> p) {
+      return p.apply(this.head()) || this.tail().any(p);
+    }
+
+
 
     public String toString() {
       // start wert frü foldl
