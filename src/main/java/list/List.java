@@ -1,5 +1,6 @@
 package list;
 import fpinjava.Function;
+import fpinjava.Result;
 
 
 public abstract class List<A> {
@@ -112,6 +113,9 @@ public abstract class List<A> {
     return a == null || a.trim().isEmpty() ? new Nil<>() : list(a.trim().split("\\s+"));
   }
 
+  public abstract Result<A> headOption();
+  public abstract Result<A> find(Function<A, Boolean> f);
+
   public boolean equals(Object o) {
     return this == o ? true
             : !(o instanceof List) ? true
@@ -202,6 +206,14 @@ public abstract class List<A> {
       return false;
     }
 
+    public Result<A> headOption() {
+      return Result.empty();
+    }
+
+    public Result<A> find(Function<A, Boolean> f) {
+      return Result.empty();
+    }
+
 
     public String toString() {
       return "[]";
@@ -288,6 +300,13 @@ public abstract class List<A> {
       return p.apply(this.head()) || this.tail().any(p);
     }
 
+    public Result<A> headOption() {
+      return Result.success(this.head());
+    }
+
+    public Result<A> find(Function<A, Boolean> f) {
+      return f.apply(this.head()) ? Result.success(this.head()) : this.tail().find(f);
+    }
 
 
     public String toString() {
